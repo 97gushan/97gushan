@@ -170,7 +170,54 @@ def manual_grow(crop):
 
     crop.grow(light, water)
     
-
+    
+def display_menu():
+    print("1. Grow manually over 1 day")
+    print("2. Grow automatically over 30 days")
+    print("3. Report status")
+    print("0. Exit test program")
+    print("")
+    print("Please select an options from the above menu")
+    
+    
+def get_menu_choice():
+    option_valid = False
+    
+    while(not option_valid):
+        try:
+            choice = int(input("Option select: "))
+            
+            if(0 <= choice <= 4):
+                option_valid = True
+            else:
+                print("Please enter a valid option")
+        except ValueError:
+            print("Please enter a valid option")
+    return choice
+    
+def manage_crop(crop):
+    print("This is the crop management program")
+    print("")
+    
+    no_exit = True
+    
+    while(no_exit):
+        display_menu()
+        option = get_menu_choice()
+        print()
+        
+        if(option == 1):
+            manual_grow(crop)
+            print()
+        elif(option == 2):
+            auto_grow(crop, 30)
+            print()
+        elif(option == 3):
+            print(crop.report())
+            print()
+        elif(option == 0):
+            no_exit = False
+            print("Thank you for using the test program")
 
 def main():
     # instantiate the Crop class 
@@ -179,9 +226,7 @@ def main():
     #print out some stuff
     print(crop.report())
     
-    manual_grow(crop)    
-    
-    print(crop.report())
+    manage_crop(crop)
     
 if(__name__ == "__main__"):
     main()
