@@ -19,7 +19,7 @@ class Crop:
         self._growth_rate = growth_rate
         self._light_need = light_need
         self._water_need = water_need
-        self._status = "Seed"
+        self._status = "seedling"
         self._type = "generic"
         
         
@@ -44,9 +44,9 @@ class Crop:
         elif(self._growth > 10):
             self._status = "mature"
         elif(self._growth > 5):
-            self._status = "Seedling"
+            self._status = "young"
         elif(self._growth == 0):
-            self._status = "seed"
+            self._status = "seedling"
             
     def grow(self, light, water):
         """ This function grows the crop if the two arguments are more than
