@@ -1,3 +1,4 @@
+from random import randint
 
 class Animal:
     """ This is a animal class"""
@@ -23,11 +24,11 @@ class Animal:
                 
     def _update_status(self):
         """ this method updates the status"""
-        if(self._weight > 50):
+        if(self._weight > 70):
             self._status = "old"
-        elif(self._weight > 40):
+        elif(self._weight > 50):
             self._status = "mature"
-        elif(self._weight > 20):
+        elif(self._weight > 30):
             self._status = "youngling"
         elif(self._weight > 0):
             self._status = "baby"
