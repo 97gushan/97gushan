@@ -67,7 +67,7 @@ class Field:
         water = 0
         
         for crop in self._crops:
-            needs = crops.needs()
+            needs = crop.needs()
             if needs["light need"] > light:
                 light = needs["light need"]
             if needs["water need"] > water:
@@ -81,6 +81,50 @@ class Field:
                 water = needs["water need"]
         return {"food": food, "light": light, "water": water}
 
+    def grow(self, light, food, water):
+        """ this method grows the crops and animals with 
+            the water, food and light that is avaible"""
+        
+        # grows the crops (water and light is avaible to all 
+        # the crops in the same amount)        
+        if len(self._crops) > 0:
+            for crop in self._crops:
+                crop.grow(light,water)
+        
+        # grows the animals ( water is avaible to all animals in the same amount)
+        # food have a total value and must be shared
+        if(len(self._animals) > 0):
+            food_required = 0
+            # get a total of the food required by the animals
+            for animal in self._animals:
+                needs = animal.needs()
+                food_required += needs["food need"]
+            
+            # if we have more food available than is required work out the 
+            # additional available food
+            if food > food_required:
+                additional_food = food - food_required
+                food = food_required
+            else:
+                additional_food = 0
+                
+            # grow the animals
+            for animal in self._animals:
+                needs = animal.needs()
+                if food >= needs["food need"]:
+                    # remove food this animal eats
+                    food -= needs["food need"]
+                    feed = needs["food need"]
+                    # see if there is any additional food to give
+                    if additional_food > 0:
+                        #remove some additional food for this animal
+                        additional_food -= 1
+                        
+                        feed += 1
+                        
+                    #grow the animal
+                    animal.grow(feed, water)
+                        
 def display_crops(crop_list):
     """ this function displays the crops in the field"""    
     
@@ -156,6 +200,9 @@ def main():
     
     report = new_field.report_needs()
     print(report)
+    
+    new_field.grow(10, 10,6)
+    print(new_field.report_contents)
     
     
 if(__name__ == "__main__"):
