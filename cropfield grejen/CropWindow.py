@@ -15,7 +15,17 @@ class CropWindow(QMainWindow):
     def __init__(self):
         super().__init__() # call the soper class constructor
         self.setWindowTitle("Crop simulator") # set window title
-        self.create_select_crop_layout()        
+        self.create_select_crop_layout()  
+        
+        self.stacked_layout = QStackedLayout() # creates a stacked layout that holds
+                                                # the different layouts
+        self.stacked_layout.addWidget(self.select_crop_widget)
+
+        # set the central widget ot display the layout
+        self.central_widget = QWidget()
+        self.central_widget.setLayout(self.stacked_layout)
+        self.setCentralWidget(self.central_widget)
+        
         
         
     def create_select_crop_layout(self):
@@ -35,7 +45,6 @@ class CropWindow(QMainWindow):
         self.select_crop_widget = QWidget()
         self.select_crop_widget.setLayout(self.initial_layout)
         
-        self.setCentralWidget(self.select_crop_widget)
 
         # connections
         self.instantiate_button.clicked.connect(self.instantiate_crop)
@@ -59,7 +68,7 @@ class CropWindow(QMainWindow):
         self.status_grid = QGridLayout()
         
         #add label widgets to the status layout
-        self.status_grid.addWidget(self.grow_grid, 0,0)
+        self.status_grid.addWidget(self.growth_label, 0,0)
         self.status_grid.addWidget(self.days_label,1,0)
         self.status_grid.addWidget(self.status_label,2,0)
         
@@ -83,8 +92,11 @@ class CropWindow(QMainWindow):
             self.simulated_crop = Wheat()
         elif(crop_type == 2):
             self.simulated_crop = Potato()
-        print(self.simulated_crop)
-        self.setCentralWidget(self.view_crop_widget)
+        
+        self.create_view_crop_layout(crop_type) # create the view crop growth layout
+        self.stacked_layout.addWidget(self.view_crop_widget) # add rthis to stack
+        self.stacked_layout.setCurrentIndex(1) # change the visible layout
+        
 
 def main():
     crop_simulation = QApplication(sys.argv) #create ta new application
