@@ -6,6 +6,7 @@ import random
 from Wheat import *
 from Potato import *
 from RadioButtonWidget import * # provides the radiobutton class that was created
+from manual_grow_dialog_class import * # provides the manual grow dialog window
 
 class CropWindow(QMainWindow):
     """ This class creates a main window to observe the growth of the simulation"""
@@ -87,7 +88,7 @@ class CropWindow(QMainWindow):
     
 		# connectionss
         self.automatic_grow_button.clicked.connect(self.automatically_grow_crop)
-        
+        self.manual_grow_button.clicked.connect(self.manually_grow_crop)
         
     def instantiate_crop(self):
         crop_type = self.crop_radio_buttons.selected_button() # get the radio that was selected
@@ -108,7 +109,17 @@ class CropWindow(QMainWindow):
             self.simulated_crop.grow(light, water)
             
         self.update_crop_view_status()
-
+        
+    def manually_grow_crop(self):
+        manual_value_dialog = Manual_grow_dialog()
+        manual_value_dialog.exec_() # run the dialog window
+        
+        light, water = manual_value_dialog.values()
+        
+        self.simulated_crop.grow(light, water)
+        
+        self.update_crop_view_status()
+        
     def update_crop_view_status(self):
         crop_status_report = self.simulated_crop.report() # get the crop report
         
