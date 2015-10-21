@@ -34,6 +34,9 @@ class Manual_grow_dialog(QDialog):
         self.submit_button.clicked.connect(self.close)
         
     def values(self):
-        return int(self.light_spinbox.value()), int(self.water_spinbox.values())
+        return int(self.light_spinbox.value()), int(self.water_spinbox.value())
+    
+    
+    
     
         
