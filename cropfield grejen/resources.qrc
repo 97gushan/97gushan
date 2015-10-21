@@ -1,0 +1,9 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource>
+    
+        <file alias="wheat.jpg">img/wheat.png</file>
+        <file alias="potato.jpg">img/potato.png</file>
+    
+    </qresource>
+    
+</RCC>
