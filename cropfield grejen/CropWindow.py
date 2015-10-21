@@ -2,8 +2,7 @@ import sys
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-
-
+import random
 from Wheat import *
 from Potato import *
 from RadioButtonWidget import * # provides the radiobutton class that was created
@@ -86,6 +85,10 @@ class CropWindow(QMainWindow):
         self.view_crop_widget = QWidget()
         self.view_crop_widget.setLayout(self.grow_grid)
     
+		# connectionss
+        self.automatic_grow_button.clicked.connect(self.automatically_grow_crop)
+        
+        
     def instantiate_crop(self):
         crop_type = self.crop_radio_buttons.selected_button() # get the radio that was selected
         if crop_type == 1:
@@ -96,6 +99,23 @@ class CropWindow(QMainWindow):
         self.create_view_crop_layout(crop_type) # create the view crop growth layout
         self.stacked_layout.addWidget(self.view_crop_widget) # add rthis to stack
         self.stacked_layout.setCurrentIndex(1) # change the visible layout
+
+    def automatically_grow_crop(self):
+        """ this method grows the crop for 30 days"""
+        for day in range(30):
+            light = random.randint(1,10)
+            water = random.randint(1,10)
+            self.simulated_crop.grow(light, water)
+            
+        self.update_crop_view_status()
+
+    def update_crop_view_status(self):
+        crop_status_report = self.simulated_crop.report() # get the crop report
+        
+        # update the text fields
+        self.growth_line_edit.setText(str(crop_status_report["growth"]))
+        self.days_line_edit.setText(str(crop_status_report["days growing"]))
+        self.status_line_edit.setText(str(crop_status_report["status"]))
         
 
 def main():
