@@ -28,6 +28,7 @@ class Item:
         
     def get_year(self):
         """ this method returns the value of the int _year"""
+        return self._year = year
         
     
     """ Set methods """
