@@ -12,7 +12,27 @@ class Car(Item):
         super().__init__(maker, model, price, year)
         
         self._type = "car"
-        self.door_amount = door_amount
-        
+        self._door_amount = door_amount
         
     
+    
+    """ get methods"""
+    
+    def get_type(self):
+        """ this method returns the type of the object"""
+        return self._type
+        
+    def get_door_amount(self):
+        """ this method returns the value of the variable door_amount"""
+        return self._door_amount
+    
+    
+    """ set methods"""
+    
+    def set_door_amount(self, door_amount):
+        """ this method takes a int as an argument 
+            and sets the door_amount to that value"""
+        self._door_amount = door_amount
+        
+        
+        
