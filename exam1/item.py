@@ -91,6 +91,51 @@ class Car(Item):
         
         
         
+class Snowmobile(Item):
+    """ This class describes which attributes the snowmobile shall have"""
+    
+    def __init__(self, seat_amount, reverse, maker, model, price, year):
+        """ the constructor calls the super class init function 
+            with the arguments maker, model, price and year as arguments
+            it then sets the type to car and the door amount to the argument seat_amount 
+            and have_reverse"""
+        
+        super().__init__(maker, model, price, year)
+        
+        self._type = "snowmobile"
+        self._seat_amount = seat_amount
+        self._have_reverse = reverse
+        
+    
+    
+    """ get methods"""
+    
+    def get_type(self):
+        """ this method returns the type of the object"""
+        return self._type
+        
+    def get_seat_amount(self):
+        """ this method returns the value of the variable door_amount"""
+        return self._seat_amount
+    
+    def get_reverse(self):
+        """ this method returns the value of have_reverse"""
+        return self._have_reverse
+    
+    """ set methods"""
+    
+    def set_seat_amount(self, seat_amount):
+        """ this method takes a int as an argument 
+            and sets the door_amount to that value"""
+        self._seat_amount = seat_amount
+    
+    def set_reverse(self, reverse):
+        """ this method takes a boolean as a value and sets
+            have_reverse to that value"""
+        self._have_reverse = reverse
+        
+        
+        
         
         
         
