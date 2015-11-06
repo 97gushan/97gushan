@@ -55,6 +55,8 @@ class Item:
         
         
         
+#################################################################################################
+
 
 class Car(Item):
     """ This class describes which attributes the car shall have"""
@@ -90,6 +92,8 @@ class Car(Item):
         self._door_amount = door_amount
         
         
+#################################################################################################
+
         
 class Snowmobile(Item):
     """ This class describes which attributes the snowmobile shall have"""
