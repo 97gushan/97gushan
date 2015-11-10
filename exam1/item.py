@@ -91,6 +91,13 @@ class Car(Item):
             and sets the door_amount to that value"""
         self._door_amount = door_amount
         
+    
+    
+    def __str__(self):
+        """this method returns the attributes of the class in a string"""
+        return self._type + ";" + self._maker + ";" + self._model + ";" \
+        + self._year + ";" + self._price + ";" + self._door_amount + "\n"
+        
         
 #################################################################################################
 
@@ -137,6 +144,11 @@ class Snowmobile(Item):
         """ this method takes a boolean as a value and sets
             have_reverse to that value"""
         self._have_reverse = reverse
+        
+    def __str__(self):
+        """this method returns the attributes of the class in a string"""
+        return self._type + ";" + self._maker + ";" + self._model + ";" + self._year \
+        + ";" + self._price + ";" + self._seat_amount + self._have_reverse"\n"
         
         
         
