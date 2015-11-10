@@ -12,6 +12,8 @@ class Exam1(QMainWindow):
         self.setWindowTitle("Exam1 template")
         
         self.initUI()
+        
+        self.model = model.Model()
     
     def initUI(self):
         """This method is called when the application first runs
