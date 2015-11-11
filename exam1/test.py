@@ -11,17 +11,18 @@ def check_item_values(maker, model,price, year):
         is_valid = False
     elif(not price.isdigit()):
         is_valid = False
-    elif(price <= 0):
+    elif(int(price) <= 0):
         is_valid = False
     elif(not year.isdigit()):
         is_valid = False
-    elif(year < 1990 or year > 2015):
+    elif(int(year) < 1990 or int(year) > 2015):
         is_valid = False
     
     return is_valid
     
 def check_car_values(door_amount):
-    """ this method takes the door_amount and checks if they
+    """This method is for the car objects to check the valeus the car have 
+    it takes the door_amount and checks if they
     are an int or not, if yes return true, else, return false"""
     
     
@@ -34,3 +35,21 @@ def check_car_values(door_amount):
         else:
             return False
 
+            
+def check_sm_values(seat_amount, reverse):
+    """ this method is for checking values that the snowmobiles havethis
+        it takes the seat amount as an argument and checks so it is an int
+        it also takes reverse and checks so it is a boolean"""
+    is_valid = True
+    
+    if(not seat_amount.isdigit()):
+        is_valid = False
+    elif(int(seat_amount) <= 0 or int(seat_amount) > 3):
+        is_valid = False
+    elif(not isinstance(reverse, (boolean))):
+        is_valid = False
+    
+    return is_valid
+    
+    
+    
