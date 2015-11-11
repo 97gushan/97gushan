@@ -11,7 +11,7 @@ class Model:
         self.test_object = test
         
         #self.add_vehicle_through_command()
-        self.add_car("audi", "a8", "1000", "1990","2")
+        self.add_sm("audi", "a8", "1000", "1990","2", True)
         
         
         
@@ -37,4 +37,6 @@ class Model:
         else:
             print("values entered are not accepted")
         
+        print(self._vehicle_list[0])
+
         
