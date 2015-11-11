@@ -148,7 +148,7 @@ class Snowmobile(Item):
     def __str__(self):
         """this method returns the attributes of the class in a string"""
         return self._type + ";" + self._maker + ";" + self._model + ";" + self._year \
-        + ";" + self._price + ";" + self._seat_amount + ";" + self._have_reverse + "\n"
+        + ";" + self._price + ";" + self._seat_amount + ";" + str(self._have_reverse) + "\n"
         
         
         
