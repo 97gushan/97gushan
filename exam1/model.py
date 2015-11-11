@@ -20,8 +20,11 @@ class Model:
         """ this method adds a car to the vehicle_list if all the values
         are acceptable"""
         
-        if(self.test_object.check_item_values(maker,model,price,year)):
+        if(self.test_object.check_item_values(maker,model,price,year) and 
+        self.test_object.check_car_values(door_amount)):
             self._vehicle_list.append(item.Car(door_amount,maker, model,price, year))
+        else:
+            print("values entered are not accepted")
         print(self._vehicle_list[0])
         
         
