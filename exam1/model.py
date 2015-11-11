@@ -27,4 +27,14 @@ class Model:
             print("values entered are not accepted")
         print(self._vehicle_list[0])
         
+    def add_sm(self, maker, model, price, year, seat_amount, reverse):
+        """ this method adds a snowmobile to the vehicle_list if all teh valeus
+        are correct and acceptable"""
+        
+        if(self.test_object.check_item_values(maker,model,price,year) and 
+        self.test_object.check_sm_values(seat_amount, reverse)):
+            self._vehicle_list.append(item.Snowmobile(seat_amount, reverse,maker, model,price, year))
+        else:
+            print("values entered are not accepted")
+        
         
