@@ -38,5 +38,11 @@ class Model:
             print("values entered are not accepted")
         
         print(self._vehicle_list[0])
+        
+        
+    def remove_vehicle(self, index):
+        """ this method takes a int as an argument and
+        removes the object from vehicle_list with that index"""
+        self._vehicle_list.pop(index)
 
         
