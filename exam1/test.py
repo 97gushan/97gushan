@@ -11,7 +11,11 @@ def check_item_values(maker, model,price, year):
         is_valid = False
     elif(not price.isdigit()):
         is_valid = False
+    elif(price <= 0):
+        is_valid = False
     elif(not year.isdigit()):
+        is_valid = False
+    elif(year < 1990 or year > 2015):
         is_valid = False
     
     return is_valid
