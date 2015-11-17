@@ -61,7 +61,7 @@ class Item:
 class Car(Item):
     """ This class describes which attributes the car shall have"""
     
-    def __init__(self, door_amount, maker, model, price, year):
+    def __init__(self, maker, model, price, year, door_amount):
         """ the constructor calls the super class init function 
             with the arguments maker, model, price and year as arguments
             it then sets the type to car and the door amount to the argument door_amount"""
@@ -105,7 +105,7 @@ class Car(Item):
 class Snowmobile(Item):
     """ This class describes which attributes the snowmobile shall have"""
     
-    def __init__(self, seat_amount, reverse, maker, model, price, year):
+    def __init__(self, maker, model, price, year, seat_amount, reverse):
         """ the constructor calls the super class init function 
             with the arguments maker, model, price and year as arguments
             it then sets the type to car and the door amount to the argument seat_amount 
@@ -147,8 +147,15 @@ class Snowmobile(Item):
         
     def __str__(self):
         """this method returns the attributes of the class in a string"""
+        
+        # check if have_reverse is true
+        if(self._have_reverse):
+            return_value = "True"
+        else:
+            return_value = "False"
+        
         return self._type + ";" + self._maker + ";" + self._model + ";" + self._year \
-        + ";" + self._price + ";" + self._seat_amount + ";" + str(self._have_reverse) + "\n"
+        + ";" + self._price + ";" + self._seat_amount + ";" + str(return_value) + "\n"
         
         
         
