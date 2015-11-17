@@ -30,7 +30,7 @@ def check_car_values(door_amount):
         return False
     else:
         # check so the door_amount is above 0 and below 10
-        if(door_amount > 0 and door_amount <= 10):
+        if(int(door_amount) > 0 and int(door_amount) <= 10):
             return True
         else:
             return False
