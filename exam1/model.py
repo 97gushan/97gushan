@@ -56,3 +56,17 @@ class Model:
         return self._vehicle_list
 
         
+    def set_car_values(self, index, maker="-1", model="-1", price="-1", year="-1", door_amount="-1"):
+        """ this method sets new values to a car object"""
+        
+        # check so the values are acceptable
+        if(self.test_object.check_item_values(maker,model,price,year) and 
+        self.test_object.check_car_values(door_amount)):
+            
+            # set the new values to the object
+            self.vehicle_list[index].set_maker(maker)
+            self.vehicle_list[index].set_model(model)
+            self.vehicle_list[index].set_price(price)
+            self.vehicle_list[index].set_year(year)
+            self.vehicle_list[index].set_door_amount(door_amount)
+        
