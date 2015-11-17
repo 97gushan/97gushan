@@ -12,6 +12,9 @@ class Model:
         
         #self.add_vehicle_through_command()
         self.add_sm("audi", "a8", "1000", "1990","2", True)
+        print(self._vehicle_list[0])
+        self.set_sm_values(0, "kakor", "5", "233", "2003", "1", False)
+        print(self._vehicle_list[0])
         
         
         
@@ -56,7 +59,7 @@ class Model:
         return self._vehicle_list
 
         
-    def set_car_values(self, index, maker="-1", model="-1", price="-1", year="-1", door_amount="-1"):
+    def set_car_values(self, index, maker, model, price, year, door_amount):
         """ this method sets new values to a car object"""
         
         # check so the values are acceptable
@@ -64,9 +67,24 @@ class Model:
         self.test_object.check_car_values(door_amount)):
             
             # set the new values to the object
-            self.vehicle_list[index].set_maker(maker)
-            self.vehicle_list[index].set_model(model)
-            self.vehicle_list[index].set_price(price)
-            self.vehicle_list[index].set_year(year)
-            self.vehicle_list[index].set_door_amount(door_amount)
+            self._vehicle_list[index].set_maker(maker)
+            self._vehicle_list[index].set_model(model)
+            self._vehicle_list[index].set_price(price)
+            self._vehicle_list[index].set_year(year)
+            self._vehicle_list[index].set_door_amount(door_amount)
+            
+    def set_sm_values(self, index, maker, model, price, year, seat_amount, reverse):
+        """ this method sets new values to a snowmobile object"""
+        
+        # check so the values are acceptable
+        if(self.test_object.check_item_values(maker,model,price,year) and 
+        self.test_object.check_sm_values(seat_amount, reverse)):
+            
+            # set the new values to the object
+            self._vehicle_list[index].set_maker(maker)
+            self._vehicle_list[index].set_model(model)
+            self._vehicle_list[index].set_price(price)
+            self._vehicle_list[index].set_year(year)
+            self._vehicle_list[index].set_seat_amount(seat_amount)
+            self._vehicle_list[index].set_reverse(reverse)
         
