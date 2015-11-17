@@ -18,7 +18,6 @@ class Model:
         
         
         
-        
     def add_car(self, maker, model,price, year, door_amount):
         """ this method adds a car to the vehicle_list if all the values
         are acceptable"""
@@ -88,3 +87,13 @@ class Model:
             self._vehicle_list[index].set_seat_amount(seat_amount)
             self._vehicle_list[index].set_reverse(reverse)
         
+    def write_to_file(self):
+        """ this method writes to the file"""
+        file = open("./vehicles.csv", 'w')
+        
+        for item in self._vehicle_list:
+            file.write(item.__str__())
+        
+        file.close()
+        
+    
