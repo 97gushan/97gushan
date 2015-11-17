@@ -12,6 +12,7 @@ class Model:
         
         #self.add_vehicle_through_command()
         self.add_sm("audi", "a8", "1000", "1990","2", True)
+        self.add_car("opel", "5", "9999", "1950", "4")
 
         self.write_to_file()
         self.read_from_file()
@@ -27,7 +28,7 @@ class Model:
         self.test_object.check_car_values(door_amount)):
             
             # add car to vehicle_list
-            self._vehicle_list.append(item.Car(door_amount,maker, model,price, year))
+            self._vehicle_list.append(item.Car(maker, model,price, year,door_amount))
         else:
             print("values entered are not accepted")
         print(self._vehicle_list[0])
@@ -40,11 +41,11 @@ class Model:
         self.test_object.check_sm_values(seat_amount, reverse)):
             
             # add snowmobile to vehicle_list
-            self._vehicle_list.append(item.Snowmobile(seat_amount, reverse,maker, model,price, year))
+            self._vehicle_list.append(item.Snowmobile(maker, model,price, year,seat_amount, reverse))
         else:
             print("values entered are not accepted")
         
-        print(self._vehicle_list[0])
+        #print(self._vehicle_list[0])
         
         
     def remove_vehicle(self, index):
@@ -117,20 +118,23 @@ class Model:
             
             ##############################
             # must remove the \n in the last value 
+            last_value = values[len(values)-1]
+            last_value = last_value.rstrip("\n")
+            print(last_value)
+            print("test")
             
             # check if it should be a car
             if(values[0] == "car"):
             
                 # add the vehicle to the list
-                self._vehicle_list.append(item.Car(values[1], values[2], values[3], values[4], values[5]))
+                self._vehicle_list.append(item.Car(values[1], values[2], values[3], values[4],last_value))
             
             # check if it should be a snowmobile
             elif(values[0]== "snowmobile"):
                 
                 # add the vehicle to the list
-                self._vehicle_list.append(item.Snowmobile(values[1], values[2], values[3], values[4], values[5], values[6]))
+                self._vehicle_list.append(item.Snowmobile(values[1], values[2], values[3], values[4], values[5], last_value))
             
         
-        print(self._vehicle_list[0])
         
         file.close()
