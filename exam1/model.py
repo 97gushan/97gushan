@@ -12,9 +12,10 @@ class Model:
         
         #self.add_vehicle_through_command()
         self.add_sm("audi", "a8", "1000", "1990","2", True)
-        print(self._vehicle_list[0])
-        self.set_sm_values(0, "kakor", "5", "233", "2003", "1", False)
-        print(self._vehicle_list[0])
+
+        self.write_to_file()
+        self.read_from_file()
+        #self.write_to_file()
         
         
         
@@ -96,4 +97,40 @@ class Model:
         
         file.close()
         
-    
+        
+        
+    def read_from_file(self):
+        """ this method reads from the vehicle file and 
+            creates objects with those values and adds them 
+            to the vehicle_list"""
+            
+        file = open("./vehicles.csv", "r")
+        
+        self._vehicle_list = []
+        
+        for line in file:
+        
+            # removes unnecesary spaces
+            line.split()
+            
+            values = line.split(";")
+            
+            ##############################
+            # must remove the \n in the last value 
+            
+            # check if it should be a car
+            if(values[0] == "car"):
+            
+                # add the vehicle to the list
+                self._vehicle_list.append(item.Car(values[1], values[2], values[3], values[4], values[5]))
+            
+            # check if it should be a snowmobile
+            elif(values[0]== "snowmobile"):
+                
+                # add the vehicle to the list
+                self._vehicle_list.append(item.Snowmobile(values[1], values[2], values[3], values[4], values[5], values[6]))
+            
+        
+        print(self._vehicle_list[0])
+        
+        file.close()
