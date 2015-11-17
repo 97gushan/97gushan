@@ -10,13 +10,6 @@ class Model:
         
         self.test_object = test
         
-        #self.add_vehicle_through_command()
-        self.add_sm("audi", "a8", "1000", "1990","2", True)
-        self.add_car("opel", "5", "9999", "1950", "4")
-
-        self.write_to_file()
-        self.read_from_file()
-        #self.write_to_file()
         
         
         
