@@ -59,9 +59,9 @@ class Exam1(QMainWindow):
         
         
         # Combobox
-        cbox_vehicle_type = QComboBox()
-        cbox_vehicle_type.addItems("Car Snowmobile".split())
-        cbox_vehicle_type.activated["QString"].connect(self.add_vehicle_spesific_layouts)
+        self.cbox_vehicle_type = QComboBox()
+        self.cbox_vehicle_type.addItems("Vehicle Car Snowmobile".split())
+        self.cbox_vehicle_type.activated["QString"].connect(self.add_vehicle_spesific_layouts)
         
         # line edits
         le_list = [QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self)]
@@ -79,7 +79,7 @@ class Exam1(QMainWindow):
             self.layouts[n].addWidget(lbl_list[n])
 
             if(n == 0):
-                self.layouts[n].addWidget(cbox_vehicle_type)
+                self.layouts[n].addWidget(self.cbox_vehicle_type)
             else:
                 self.layouts[n].addWidget(le_list[n])
         
@@ -108,6 +108,63 @@ class Exam1(QMainWindow):
         dialog_window.show()
     
     def add_vehicle_spesific_layouts(self, vehicle_type):
+        """ this method takes a string as an argument
+        it then checks if it is a car or a snowmobile and
+        depending on which one, it ads a new label and lineedit"""
+        
+        if(vehicle_type == "Car"):
+        
+            # create a new layout
+            new_layout = QHBoxLayout()
+            
+            # create the new widgets that will be in the layout
+            lbl_door_amount = QLabel("Amount of doors: ")
+            le_door_amount = QLineEdit()
+            
+            # add the new widgets to the layout
+            new_layout.addWidget(lbl_door_amount)
+            new_layout.addWidget(le_door_amount)
+            
+            # add the layout to the main_layout
+            self.main_layout.addLayout(new_layout)
+            
+            # disable the combobox
+            self.cbox_vehicle_type.setEnabled(False)
+
+        
+        elif(vehicle_type == "Snowmobile"):
+            # create a list of layouts
+            new_layouts = [QHBoxLayout(), QHBoxLayout()]
+            
+            # creates the new widgets
+            lbl_seat_amount = QLabel("Amount of seats: ")
+            le_seat_ammount = QLineEdit()
+            
+            lbl_have_reverse = QLabel("Reverse: ")
+            rb_have_reverse = QRadioButton()
+            
+            
+            # add the widgets to the two layouts
+            new_layouts[0].addWidget(lbl_seat_amount)
+            new_layouts[0].addWidget(le_seat_ammount)
+            
+            new_layouts[1].addWidget(lbl_have_reverse)
+            new_layouts[1].addWidget(rb_have_reverse)
+            
+            
+            # add the layouts to the main layout
+            self.main_layout.addLayout(new_layouts[0])
+            self.main_layout.addLayout(new_layouts[1])
+            
+            # disable the combobox
+            self.cbox_vehicle_type.setEnabled(False)
+
+        
+            
+            
+        
+    
+    
         
     
     def run(self):
