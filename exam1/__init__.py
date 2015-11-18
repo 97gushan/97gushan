@@ -26,7 +26,7 @@ class Exam1(QMainWindow):
         self.setCentralWidget(self.frame)
         
         # create the main layout as a horizontal box layout
-        self.main_layout = QHBoxLayout()
+        self.vertical_layout = QHBoxLayout()
         
         # create the add_vehicle button and connect it to the open_add_vehicle_window method
         self.btn_add_vehicle = QPushButton("Add vehicle", self)
@@ -34,7 +34,7 @@ class Exam1(QMainWindow):
 
 
         # add the widgets to the main_layout
-        self.main_layout.addWidget(self.btn_add_vehicle)
+        self.vertical_layout.addWidget(self.btn_add_vehicle)
         
     
     def open_add_vehicle_window(self):
@@ -42,8 +42,8 @@ class Exam1(QMainWindow):
         input from the user and then create a object with those values"""
         print("open a new window")
         
-        dialog_window = QDialog(self)
-        dialog_window.setWindowTitle("Add new object")
+        self.dialog_window = QDialog(self)
+        self.dialog_window.setWindowTitle("Add new object")
         
         # buttons
         self.btn_add = QPushButton("Add", self)
@@ -67,21 +67,21 @@ class Exam1(QMainWindow):
         self.le_list = [QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self)]
        
         # layouts
-        self.main_layout = QVBoxLayout()
+        self.vertical_layout = QVBoxLayout()
         button_layout = QHBoxLayout()
-        self.layouts = [QHBoxLayout(),QHBoxLayout(),QHBoxLayout(),QHBoxLayout(),QHBoxLayout()]
+        layouts = [QHBoxLayout(),QHBoxLayout(),QHBoxLayout(),QHBoxLayout(),QHBoxLayout()]
         
         
         
         # adding widgets to layouts
         
-        for n in range(len(self.layouts)):
-            self.layouts[n].addWidget(lbl_list[n])
+        for n in range(len(layouts)):
+            layouts[n].addWidget(lbl_list[n])
 
             if(n == 0):
-                self.layouts[n].addWidget(self.cbox_vehicle_type)
+                layouts[n].addWidget(self.cbox_vehicle_type)
             else:
-                self.layouts[n].addWidget(self.le_list[n])
+                layouts[n].addWidget(self.le_list[n])
         
         # button layout
         button_layout.addWidget(self.btn_add)
@@ -89,23 +89,23 @@ class Exam1(QMainWindow):
         
         # add widgets and layouts to main layout
 
-        for n in range(len(self.layouts)):
-            self.main_layout.addLayout(self.layouts[n])
+        for n in range(len(layouts)):
+            self.vertical_layout.addLayout(layouts[n])
         
-        #self.main_layout.addLayout(button_layout)
+        #self.vertical_layout.addLayout(button_layout)
         
-        test_layout = QVBoxLayout()
+        main_layout = QVBoxLayout()
         
-        test_layout.addLayout(self.main_layout)
-        test_layout.addLayout(button_layout)
+        main_layout.addLayout(self.vertical_layout)
+        main_layout.addLayout(button_layout)
         
         #set the layout to the dialog_window
-        dialog_window.setLayout(test_layout)
+        self.dialog_window.setLayout(main_layout)
         
         
         # show the dialog_window
         
-        dialog_window.show()
+        self.dialog_window.show()
     
     def add_vehicle_spesific_layouts(self, vehicle_type):
         """ this method takes a string as an argument
@@ -126,7 +126,7 @@ class Exam1(QMainWindow):
             new_layout.addWidget(self.le_door_amount)
             
             # add the layout to the main_layout
-            self.main_layout.addLayout(new_layout)
+            self.vertical_layout.addLayout(new_layout)
             
             # disable the combobox
             self.cbox_vehicle_type.setEnabled(False)
@@ -153,8 +153,8 @@ class Exam1(QMainWindow):
             
             
             # add the layouts to the main layout
-            self.main_layout.addLayout(new_layouts[0])
-            self.main_layout.addLayout(new_layouts[1])
+            self.vertical_layout.addLayout(new_layouts[0])
+            self.vertical_layout.addLayout(new_layouts[1])
             
             # disable the combobox
             self.cbox_vehicle_type.setEnabled(False)
@@ -184,6 +184,7 @@ class Exam1(QMainWindow):
         if(user_inputs[0] == "Car"):
             user_inputs.append(self.le_door_amount.text())
             
+            # call the add_car method with the users values
             self.model.add_car(user_inputs[1],
                                user_inputs[2],
                                user_inputs[3],
@@ -191,14 +192,18 @@ class Exam1(QMainWindow):
                                user_inputs[5],)
             
             
+        # if the user wants a snowmobile
         elif(user_inputs[0] == "Snowmobile"):
             user_inputs.append(self.le_seat_ammount.text())
-            
+
+
+            # check if the user clicked in the radiobutton
             if(self.rb_have_reverse.isChecked()):
                 user_inputs.append("True")
             else:
                 user_inputs.append("False")
-                
+            
+            # call the add_sm method with the user values
             self.model.add_sm(user_inputs[1],
                                user_inputs[2],
                                user_inputs[3],
@@ -206,6 +211,8 @@ class Exam1(QMainWindow):
                                user_inputs[5],
                                user_inputs[6])
         
+        
+        self.dialog_window.close()
             
     
         
