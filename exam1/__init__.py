@@ -38,36 +38,77 @@ class Exam1(QMainWindow):
         
     
     def open_add_vehicle_window(self):
+        """ this method creates a QDialog window that can take 
+        input from the user and then create a object with those values"""
         print("open a new window")
         
         dialog_window = QDialog(self)
+        dialog_window.setWindowTitle("Add new object")
         
         # buttons
         btn_add = QPushButton("Add", self)
+        btn_add.clicked.connect(self.add_vehicle_spesific_layouts)
+        
         btn_cancel = QPushButton("Cancel", self)
         
-        # line edits
-        text = QLineEdit("enter text", self)
         
+        
+        # labels
+        lbl_list = [QLabel("Vehicle type: "),QLabel("Maker: "),QLabel("Model: "),\
+                    QLabel("Price: "),QLabel("Manufacturing year: ")]
+        
+        
+        # Combobox
+        cbox_vehicle_type = QComboBox()
+        cbox_vehicle_type.addItems("Car Snowmobile".split())
+        cbox_vehicle_type.activated["QString"].connect(self.add_vehicle_spesific_layouts)
+        
+        # line edits
+        le_list = [QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self)]
+       
         # layouts
-        main_layout = QVBoxLayout()
+        self.main_layout = QVBoxLayout()
         button_layout = QHBoxLayout()
+        self.layouts = [QHBoxLayout(),QHBoxLayout(),QHBoxLayout(),QHBoxLayout(),QHBoxLayout()]
+        
         
         
         # adding widgets to layouts
+        
+        for n in range(len(self.layouts)):
+            self.layouts[n].addWidget(lbl_list[n])
+
+            if(n == 0):
+                self.layouts[n].addWidget(cbox_vehicle_type)
+            else:
+                self.layouts[n].addWidget(le_list[n])
+        
+        # button layout
         button_layout.addWidget(btn_add)
         button_layout.addWidget(btn_cancel)
         
-        main_layout.addWidget(text)
+        # add widgets and layouts to main layout
 
-        main_layout.addLayout(button_layout)
+        for n in range(len(self.layouts)):
+            self.main_layout.addLayout(self.layouts[n])
+        
+        #self.main_layout.addLayout(button_layout)
+        
+        test_layout = QVBoxLayout()
+        
+        test_layout.addLayout(self.main_layout)
+        test_layout.addLayout(button_layout)
         
         #set the layout to the dialog_window
-        dialog_window.setLayout(main_layout)
+        dialog_window.setLayout(test_layout)
         
         
         # show the dialog_window
+        
         dialog_window.show()
+    
+    def add_vehicle_spesific_layouts(self, vehicle_type):
+        
     
     def run(self):
         self.show()
