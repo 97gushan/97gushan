@@ -46,8 +46,8 @@ class Exam1(QMainWindow):
         dialog_window.setWindowTitle("Add new object")
         
         # buttons
-        btn_add = QPushButton("Add", self)
-        btn_add.clicked.connect(self.add_vehicle_spesific_layouts)
+        self.btn_add = QPushButton("Add", self)
+        self.btn_add.clicked.connect(self.add_vehicle)
         
         btn_cancel = QPushButton("Cancel", self)
         
@@ -84,7 +84,7 @@ class Exam1(QMainWindow):
                 self.layouts[n].addWidget(le_list[n])
         
         # button layout
-        button_layout.addWidget(btn_add)
+        button_layout.addWidget(self.btn_add)
         button_layout.addWidget(btn_cancel)
         
         # add widgets and layouts to main layout
@@ -160,7 +160,14 @@ class Exam1(QMainWindow):
             self.cbox_vehicle_type.setEnabled(False)
 
         
-            
+    def add_vehicle(self):
+        """ this method takes the values the user inputs and adds a vehicle with these values"""
+        
+        user_inputs = []
+        
+        # add the type of the vehicle to the list
+        user_inputs.append(self.cbox_vehicle_type.itemText(self.cbox_vehicle_type.currentIndex()))
+        
             
         
     
