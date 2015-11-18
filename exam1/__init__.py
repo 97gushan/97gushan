@@ -64,7 +64,7 @@ class Exam1(QMainWindow):
         self.cbox_vehicle_type.activated["QString"].connect(self.add_vehicle_spesific_layouts)
         
         # line edits
-        le_list = [QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self)]
+        self.le_list = [QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self),QLineEdit("", self)]
        
         # layouts
         self.main_layout = QVBoxLayout()
@@ -81,7 +81,7 @@ class Exam1(QMainWindow):
             if(n == 0):
                 self.layouts[n].addWidget(self.cbox_vehicle_type)
             else:
-                self.layouts[n].addWidget(le_list[n])
+                self.layouts[n].addWidget(self.le_list[n])
         
         # button layout
         button_layout.addWidget(self.btn_add)
@@ -119,11 +119,11 @@ class Exam1(QMainWindow):
             
             # create the new widgets that will be in the layout
             lbl_door_amount = QLabel("Amount of doors: ")
-            le_door_amount = QLineEdit()
+            self.le_door_amount = QLineEdit()
             
             # add the new widgets to the layout
             new_layout.addWidget(lbl_door_amount)
-            new_layout.addWidget(le_door_amount)
+            new_layout.addWidget(self.le_door_amount)
             
             # add the layout to the main_layout
             self.main_layout.addLayout(new_layout)
@@ -138,18 +138,18 @@ class Exam1(QMainWindow):
             
             # creates the new widgets
             lbl_seat_amount = QLabel("Amount of seats: ")
-            le_seat_ammount = QLineEdit()
+            self.le_seat_ammount = QLineEdit()
             
             lbl_have_reverse = QLabel("Reverse: ")
-            rb_have_reverse = QRadioButton()
+            self.rb_have_reverse = QRadioButton()
             
             
             # add the widgets to the two layouts
             new_layouts[0].addWidget(lbl_seat_amount)
-            new_layouts[0].addWidget(le_seat_ammount)
+            new_layouts[0].addWidget(self.le_seat_ammount)
             
             new_layouts[1].addWidget(lbl_have_reverse)
-            new_layouts[1].addWidget(rb_have_reverse)
+            new_layouts[1].addWidget(self.rb_have_reverse)
             
             
             # add the layouts to the main layout
@@ -168,6 +168,29 @@ class Exam1(QMainWindow):
         # add the type of the vehicle to the list
         user_inputs.append(self.cbox_vehicle_type.itemText(self.cbox_vehicle_type.currentIndex()))
         
+        # add the maker to the list
+        user_inputs.append(self.le_list[1].text())
+        
+        # add the model to the list
+        user_inputs.append(self.le_list[2].text())
+        
+        # add the price to the list
+        user_inputs.append(self.le_list[3].text())
+        
+        # add the manufacturing year to the list
+        user_inputs.append(self.le_list[4].text())
+        
+        if(user_inputs[0] == "Car"):
+            user_inputs.append(self.le_door_amount.text())
+        elif(user_inputs[0] == "Snowmobile"):
+            user_inputs.append(self.le_seat_ammount.text())
+            
+            if(self.rb_have_reverse.isChecked()):
+                user_inputs.append("True")
+            else:
+                user_inputs.append("False")
+        
+        print(user_inputs)
             
         
     
