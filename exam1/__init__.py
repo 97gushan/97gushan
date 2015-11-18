@@ -43,19 +43,24 @@ class Exam1(QMainWindow):
         dialog_window = QDialog(self)
         
         # buttons
-        btn_add = QPushButton("test", self)
+        btn_add = QPushButton("Add", self)
+        btn_cancel = QPushButton("Cancel", self)
         
         # line edits
         text = QLineEdit("enter text", self)
         
         # layouts
         main_layout = QVBoxLayout()
+        button_layout = QHBoxLayout()
         
         
         # adding widgets to layouts
+        button_layout.addWidget(btn_add)
+        button_layout.addWidget(btn_cancel)
+        
         main_layout.addWidget(text)
 
-        main_layout.addWidget(btn_add)
+        main_layout.addLayout(button_layout)
         
         #set the layout to the dialog_window
         dialog_window.setLayout(main_layout)
