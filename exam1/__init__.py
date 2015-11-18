@@ -21,18 +21,48 @@ class Exam1(QMainWindow):
         """This method is called when the application first runs
             The method initializes all the gui """
         
+        # crates a QMainWindow and sets it as central widget
         self.frame = QMainWindow(self)
         self.setCentralWidget(self.frame)
         
+        # create the main layout as a horizontal box layout
         self.main_layout = QHBoxLayout()
         
+        # create the add_vehicle button and connect it to the open_add_vehicle_window method
         self.btn_add_vehicle = QPushButton("Add vehicle", self)
         self.btn_add_vehicle.clicked.connect(self.open_add_vehicle_window)
-        
+
+
+        # add the widgets to the main_layout
         self.main_layout.addWidget(self.btn_add_vehicle)
+        
     
     def open_add_vehicle_window(self):
         print("open a new window")
+        
+        dialog_window = QDialog(self)
+        
+        # buttons
+        btn_add = QPushButton("test", self)
+        
+        # line edits
+        text = QLineEdit("enter text", self)
+        
+        # layouts
+        main_layout = QVBoxLayout()
+        
+        
+        # adding widgets to layouts
+        main_layout.addWidget(text)
+
+        main_layout.addWidget(btn_add)
+        
+        #set the layout to the dialog_window
+        dialog_window.setLayout(main_layout)
+        
+        
+        # show the dialog_window
+        dialog_window.show()
     
     def run(self):
         self.show()
