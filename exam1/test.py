@@ -46,8 +46,7 @@ def check_sm_values(seat_amount, reverse):
         is_valid = False
     elif(int(seat_amount) <= 0 or int(seat_amount) > 3):
         is_valid = False
-    elif(not isinstance(reverse, (bool))):
-        is_valid = False
+    
         
     
     return is_valid
