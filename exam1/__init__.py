@@ -10,9 +10,12 @@ class Exam1(QMainWindow):
         super(Exam1, self).__init__()
         
         self.setWindowTitle("Exam1 template")
-        
+        self.resize(500,500)
+
         
         self.model = model.Model()
+        
+        self.model.read_from_file()
     
         self.initUI()
 
@@ -22,20 +25,48 @@ class Exam1(QMainWindow):
             The method initializes all the gui """
         
         # crates a QMainWindow and sets it as central widget
-        self.frame = QMainWindow(self)
+        self.frame = QWidget(self)
         self.setCentralWidget(self.frame)
         
+        
         # create the main layout as a horizontal box layout
-        self.vertical_layout = QHBoxLayout()
+        self.main_layout = QHBoxLayout(self.frame)
+        
+        # create the layout for the QRadioButton 
+        self.rb_layout = QVBoxLayout()
         
         # create the add_vehicle button and connect it to the open_add_vehicle_window method
         self.btn_add_vehicle = QPushButton("Add vehicle", self)
         self.btn_add_vehicle.clicked.connect(self.open_add_vehicle_window)
-
-
-        # add the widgets to the main_layout
-        self.vertical_layout.addWidget(self.btn_add_vehicle)
         
+        
+        # create a list of radiobuttons so the user can se and use the objects that he have
+        self.create_vehicle_radio_button()
+
+        print(self.rb_objects)
+        
+        # add the widgets to the main_layout
+        if(len(self.rb_objects) > 0):
+            for n in range(len(self.rb_objects)):
+                self.rb_layout.addWidget(self.rb_objects[n])
+        
+        self.rb_layout.addWidget(self.btn_add_vehicle)
+        
+        
+        # add the layouts to the main_layout
+        self.main_layout.addLayout(self.rb_layout)
+        
+    
+    def create_vehicle_radio_button(self):
+        """ this method will create radiobuttons of each and every
+            object that the user have crated"""
+        
+        self.rb_objects = []
+        
+        for n in range(len(self.model.get_vehicle_list())):
+            vehicle = self.model.get_vehicle_list()[n]
+            self.rb_objects.append(QRadioButton(vehicle.get_type() + " " + vehicle.get_maker() + " " + vehicle.get_model()))
+            
     
     def open_add_vehicle_window(self):
         """ this method creates a QDialog window that can take 
@@ -215,6 +246,8 @@ class Exam1(QMainWindow):
                                user_inputs[6])):
                 
                 self.dialog_window.close()
+                
+        
 
         
         
