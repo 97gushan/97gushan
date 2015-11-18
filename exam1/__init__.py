@@ -180,8 +180,17 @@ class Exam1(QMainWindow):
         # add the manufacturing year to the list
         user_inputs.append(self.le_list[4].text())
         
+        # if the user wants a car
         if(user_inputs[0] == "Car"):
             user_inputs.append(self.le_door_amount.text())
+            
+            self.model.add_car(user_inputs[1],
+                               user_inputs[2],
+                               user_inputs[3],
+                               user_inputs[4],
+                               user_inputs[5],)
+            
+            
         elif(user_inputs[0] == "Snowmobile"):
             user_inputs.append(self.le_seat_ammount.text())
             
@@ -189,11 +198,15 @@ class Exam1(QMainWindow):
                 user_inputs.append("True")
             else:
                 user_inputs.append("False")
+                
+            self.model.add_sm(user_inputs[1],
+                               user_inputs[2],
+                               user_inputs[3],
+                               user_inputs[4],
+                               user_inputs[5],
+                               user_inputs[6])
         
-        print(user_inputs)
             
-        
-    
     
         
     
