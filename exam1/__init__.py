@@ -49,7 +49,9 @@ class Exam1(QMainWindow):
         self.btn_add = QPushButton("Add", self)
         self.btn_add.clicked.connect(self.add_vehicle)
         
+        # create the cancel button and if it is pressed: close the window
         btn_cancel = QPushButton("Cancel", self)
+        btn_cancel.clicked.connect(self.dialog_window.close)
         
         
         
