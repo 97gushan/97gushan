@@ -185,11 +185,12 @@ class Exam1(QMainWindow):
             user_inputs.append(self.le_door_amount.text())
             
             # call the add_car method with the users values
-            self.model.add_car(user_inputs[1],
+            if(self.model.add_car(user_inputs[1],
                                user_inputs[2],
                                user_inputs[3],
                                user_inputs[4],
-                               user_inputs[5],)
+                               user_inputs[5],)):
+                self.dialog_window.close()
             
             
         # if the user wants a snowmobile
@@ -204,15 +205,17 @@ class Exam1(QMainWindow):
                 user_inputs.append("False")
             
             # call the add_sm method with the user values
-            self.model.add_sm(user_inputs[1],
+            if(self.model.add_sm(user_inputs[1],
                                user_inputs[2],
                                user_inputs[3],
                                user_inputs[4],
                                user_inputs[5],
-                               user_inputs[6])
+                               user_inputs[6])):
+                
+                self.dialog_window.close()
+
         
         
-        self.dialog_window.close()
             
     
         
