@@ -40,6 +40,8 @@ class Exam1(QMainWindow):
         self.btn_add_vehicle.clicked.connect(self.open_add_vehicle_window)
         
         
+        self.rb_objects = []
+        
         # create a list of radiobuttons so the user can se and use the objects that he have
         self.create_vehicle_radio_button()
 
@@ -50,7 +52,7 @@ class Exam1(QMainWindow):
             for n in range(len(self.rb_objects)):
                 self.rb_layout.addWidget(self.rb_objects[n])
         
-        self.rb_layout.addWidget(self.btn_add_vehicle)
+        self.main_layout.addWidget(self.btn_add_vehicle)
         
         
         # add the layouts to the main_layout
@@ -61,11 +63,22 @@ class Exam1(QMainWindow):
         """ this method will create radiobuttons of each and every
             object that the user have crated"""
         
+        for i in range(len(self.rb_layout)-1, -1, -1):
+            item = self.rb_layout.itemAt(i)
+            
+            item.widget().close()
+            self.rb_layout.removeItem(item)
+
+        
         self.rb_objects = []
         
         for n in range(len(self.model.get_vehicle_list())):
             vehicle = self.model.get_vehicle_list()[n]
             self.rb_objects.append(QRadioButton(vehicle.get_type() + " " + vehicle.get_maker() + " " + vehicle.get_model()))
+        
+        
+        for n in range(len(self.rb_objects)):
+                self.rb_layout.addWidget(self.rb_objects[n])
             
     
     def open_add_vehicle_window(self):
@@ -223,6 +236,7 @@ class Exam1(QMainWindow):
                                user_inputs[3],
                                user_inputs[4],
                                user_inputs[5],)):
+                self.create_vehicle_radio_button()
                 self.dialog_window.close()
             
             
@@ -244,7 +258,8 @@ class Exam1(QMainWindow):
                                user_inputs[4],
                                user_inputs[5],
                                user_inputs[6])):
-                
+                               
+                self.create_vehicle_radio_button()                
                 self.dialog_window.close()
                 
         
