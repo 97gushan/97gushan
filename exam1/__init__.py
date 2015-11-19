@@ -36,16 +36,23 @@ class Exam1(QMainWindow):
         self.left_column_layout = QFormLayout()
         
         
-        # create the layout for the QRadioButton 
-        self.rb_layout = QVBoxLayout()
-        self.rb_objects = []
         
         # create the add_vehicle button and connect it to the open_add_vehicle_window method
         self.btn_add_vehicle = QPushButton("Add vehicle", self)
         self.btn_add_vehicle.clicked.connect(self.open_add_vehicle_window)
         
         
-
+        # create the scroll bar that the rb_layout is goind to use
+        left_column_scrollbar = QScrollArea()
+        left_column_scrollbar.setWidget(QWidget())
+        left_column_scrollbar.setWidgetResizable(True)
+        left_column_scrollbar.setFixedHeight(300)
+        
+        # create the layout for the QRadioButton 
+        self.rb_layout = QFormLayout(left_column_scrollbar.widget())
+        self.rb_objects = []
+        
+        
         
         # create a list of radiobuttons so the user can se and use the objects that he have
         self.create_vehicle_radio_button()
@@ -56,7 +63,7 @@ class Exam1(QMainWindow):
             for n in range(len(self.rb_objects)):
                 self.rb_layout.addWidget(self.rb_objects[n])
         
-        self.left_column_layout.addRow("",self.rb_layout)
+        self.left_column_layout.addRow("",left_column_scrollbar)
         self.left_column_layout.addRow("",self.btn_add_vehicle)
         
         
@@ -87,7 +94,7 @@ class Exam1(QMainWindow):
         
         # add the new rbs to the layout 
         for n in range(len(self.rb_objects)):
-                self.rb_layout.addWidget(self.rb_objects[n])
+                self.rb_layout.addRow("",self.rb_objects[n])
             
     
     def open_add_vehicle_window(self):
