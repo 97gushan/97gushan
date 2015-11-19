@@ -15,7 +15,7 @@ class Exam1(QMainWindow):
         
         self.model = model.Model()
         
-        self.model.read_from_file()
+        #self.model.read_from_file()
     
         self.initUI()
 
