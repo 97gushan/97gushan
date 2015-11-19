@@ -15,7 +15,7 @@ class Exam1(QMainWindow):
         
         self.model = model.Model()
         
-        #self.model.read_from_file()
+        self.model.read_from_file()
     
         self.initUI()
 
@@ -32,6 +32,10 @@ class Exam1(QMainWindow):
         # create the main layout as a horizontal box layout
         self.main_layout = QHBoxLayout(self.frame)
         
+        # create the layout for the left column
+        self.left_column_layout = QFormLayout()
+        
+        
         # create the layout for the QRadioButton 
         self.rb_layout = QVBoxLayout()
         self.rb_objects = []
@@ -47,16 +51,19 @@ class Exam1(QMainWindow):
         self.create_vehicle_radio_button()
 
         
-        # add the widgets to the main_layout
+        # add the widgets to the layouts
         if(len(self.rb_objects) > 0):
             for n in range(len(self.rb_objects)):
                 self.rb_layout.addWidget(self.rb_objects[n])
         
-        self.main_layout.addWidget(self.btn_add_vehicle)
+        self.left_column_layout.addRow("",self.rb_layout)
+        self.left_column_layout.addRow("",self.btn_add_vehicle)
+        
+        
         
         
         # add the layouts to the main_layout
-        self.main_layout.addLayout(self.rb_layout)
+        self.main_layout.addLayout(self.left_column_layout)
         
     
     def create_vehicle_radio_button(self):
