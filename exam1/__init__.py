@@ -34,18 +34,18 @@ class Exam1(QMainWindow):
         
         # create the layout for the QRadioButton 
         self.rb_layout = QVBoxLayout()
+        self.rb_objects = []
         
         # create the add_vehicle button and connect it to the open_add_vehicle_window method
         self.btn_add_vehicle = QPushButton("Add vehicle", self)
         self.btn_add_vehicle.clicked.connect(self.open_add_vehicle_window)
         
         
-        self.rb_objects = []
+
         
         # create a list of radiobuttons so the user can se and use the objects that he have
         self.create_vehicle_radio_button()
 
-        print(self.rb_objects)
         
         # add the widgets to the main_layout
         if(len(self.rb_objects) > 0):
@@ -63,20 +63,22 @@ class Exam1(QMainWindow):
         """ this method will create radiobuttons of each and every
             object that the user have crated"""
         
+        # remove all the radiobutton widgets that the rb_layout have
         for i in range(len(self.rb_layout)-1, -1, -1):
             item = self.rb_layout.itemAt(i)
             
             item.widget().close()
             self.rb_layout.removeItem(item)
 
-        
+        # empty the rb_objects list
         self.rb_objects = []
-        
+
+        # add the vehicles to the list 
         for n in range(len(self.model.get_vehicle_list())):
             vehicle = self.model.get_vehicle_list()[n]
             self.rb_objects.append(QRadioButton(vehicle.get_type() + " " + vehicle.get_maker() + " " + vehicle.get_model()))
         
-        
+        # add the new rbs to the layout 
         for n in range(len(self.rb_objects)):
                 self.rb_layout.addWidget(self.rb_objects[n])
             
