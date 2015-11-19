@@ -32,11 +32,13 @@ class Exam1(QMainWindow):
         # create the main layout as a horizontal box layout
         self.main_layout = QHBoxLayout(self.frame)
         
+        
+        """ Left Column"""
+        ############################################################
         # create the layout for the left column
         self.left_column_layout = QFormLayout()
         
-        
-        
+   
         # create the add_vehicle button and connect it to the open_add_vehicle_window method
         self.btn_add_vehicle = QPushButton("Add vehicle", self)
         self.btn_add_vehicle.clicked.connect(self.open_add_vehicle_window)
@@ -52,11 +54,11 @@ class Exam1(QMainWindow):
         self.rb_layout = QFormLayout(left_column_scrollbar.widget())
         self.rb_objects = []
         
-        
-        
         # create a list of radiobuttons so the user can se and use the objects that he have
         self.create_vehicle_radio_button()
 
+        
+        
         
         # add the widgets to the layouts
         if(len(self.rb_objects) > 0):
@@ -65,6 +67,11 @@ class Exam1(QMainWindow):
         
         self.left_column_layout.addRow("",left_column_scrollbar)
         self.left_column_layout.addRow("",self.btn_add_vehicle)
+        
+        ##########################################################
+        
+        """ Main column"""
+        ##########################################################
         
         
         
