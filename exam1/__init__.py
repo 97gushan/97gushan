@@ -117,8 +117,39 @@ class Exam1(QMainWindow):
         for n in range(len(self.rb_objects)):
                 self.rb_layout.addRow("",self.rb_objects[n])
             
+def chose_vehicle(self):
+        """ this method changes the layout of the self.main_column_layout
+        to the way the chosen vehicle in the radiobuttons wants it to be"""
+        
+        # remove all the widgets from the layout
+        for i in range(len(self.main_column_layout)-1, -1, -1):
+            item = self.main_column_layout.itemAt(i)
             
-    def open_add_vehicle_window(self):
+            item.widget().close()
+            self.main_column_layout.removeItem(item)    
+        
+        # get the chosen vehicle
+        for n in range(len(self.rb_objects)):
+            if(self.rb_objects[n].isChecked()):
+                chosen_vehicle = self.model.get_vehicle_list()[n]
+        
+        # add the standard rows
+        self.main_column_layout.addRow(chosen_vehicle.get_type() +", " + chosen_vehicle.get_maker() +", " + chosen_vehicle.get_model(), QWidget())
+        self.main_column_layout.addRow("Change maker", QLineEdit())
+        self.main_column_layout.addRow("Change model", QLineEdit())
+        self.main_column_layout.addRow("Change price", QLineEdit())
+        self.main_column_layout.addRow("Change manufacturing year", QLineEdit())
+        
+        
+        # add the rows that is vehicle specific
+        if(chosen_vehicle.get_type() == "car"):
+            self.main_column_layout.addRow("Change amount of doors", QLineEdit())
+        elif(chosen_vehicle.get_type() == "snowmobile"):
+            self.main_column_layout.addRow("Change amount of seats", QLineEdit())
+            self.main_column_layout.addRow("Reverse", QRadioButton())
+   
+
+   def open_add_vehicle_window(self):
         """ this method creates a QDialog window that can take 
         input from the user and then create a object with those values"""
         print("open a new window")
