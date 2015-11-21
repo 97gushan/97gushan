@@ -117,7 +117,7 @@ class Exam1(QMainWindow):
         for n in range(len(self.rb_objects)):
                 self.rb_layout.addRow("",self.rb_objects[n])
             
-def chose_vehicle(self):
+    def chose_vehicle(self):
         """ this method changes the layout of the self.main_column_layout
         to the way the chosen vehicle in the radiobuttons wants it to be"""
         
@@ -149,7 +149,7 @@ def chose_vehicle(self):
             self.main_column_layout.addRow("Reverse", QRadioButton())
    
 
-   def open_add_vehicle_window(self):
+    def open_add_vehicle_window(self):
         """ this method creates a QDialog window that can take 
         input from the user and then create a object with those values"""
         print("open a new window")
