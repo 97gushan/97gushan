@@ -17,6 +17,10 @@ class Exam1(QMainWindow):
         
         self.model.read_from_file()
     
+        # hold the chosen object, if nothing else has been chosen, be the first object in the list
+        if(len(self.model.get_vehicle_list()) > 0):
+            self.chosen_vehicle = self.model.get_vehicle_list()[0]
+    
         self.initUI()
 
     
@@ -46,6 +50,8 @@ class Exam1(QMainWindow):
         # create the chose_vehicle button 
         self.btn_chose_vehicle = QPushButton("Chose vehicle", self)
         self.btn_chose_vehicle.clicked.connect(self.chose_vehicle)
+        
+       
         
         
         
@@ -131,24 +137,33 @@ class Exam1(QMainWindow):
         # get the chosen vehicle
         for n in range(len(self.rb_objects)):
             if(self.rb_objects[n].isChecked()):
-                chosen_vehicle = self.model.get_vehicle_list()[n]
+                self.chosen_vehicle = self.model.get_vehicle_list()[n]
+        
+        # create the QLineEdits
+        self.le_maker = QLineEdit(self.chosen_vehicle.get_maker())
+        self.le_model = QLineEdit(self.chosen_vehicle.get_model())
+        self.le_price = QLineEdit(self.chosen_vehicle.get_price())
+        self.le_year = QLineEdit(self.chosen_vehicle.get_year())
+        
         
         # add the standard rows
-        self.main_column_layout.addRow(chosen_vehicle.get_type() +", " + chosen_vehicle.get_maker() +", " + chosen_vehicle.get_model(), QWidget())
-        self.main_column_layout.addRow("Change maker", QLineEdit())
-        self.main_column_layout.addRow("Change model", QLineEdit())
-        self.main_column_layout.addRow("Change price", QLineEdit())
-        self.main_column_layout.addRow("Change manufacturing year", QLineEdit())
+        self.main_column_layout.addRow(self.chosen_vehicle.get_type() +", " + self.chosen_vehicle.get_maker() +", " + self.chosen_vehicle.get_model(), QWidget())
+        self.main_column_layout.addRow("Change maker", self.le_maker)
+        self.main_column_layout.addRow("Change model", self.le_model)
+        self.main_column_layout.addRow("Change price", self.le_price)
+        self.main_column_layout.addRow("Change manufacturing year", self.le_year)
         
         
         # add the rows that is vehicle specific
-        if(chosen_vehicle.get_type() == "car"):
-            self.main_column_layout.addRow("Change amount of doors", QLineEdit())
-        elif(chosen_vehicle.get_type() == "snowmobile"):
-            self.main_column_layout.addRow("Change amount of seats", QLineEdit())
+        if(self.chosen_vehicle.get_type() == "car"):
+            self.main_column_layout.addRow("Change amount of doors", QLineEdit(self.chosen_vehicle.get_door_amount()))
+        elif(self.chosen_vehicle.get_type() == "snowmobile"):
+            self.main_column_layout.addRow("Change amount of seats", QLineEdit(self.chosen_vehicle.get_seat_amount()))
             self.main_column_layout.addRow("Reverse", QRadioButton())
    
-
+    
+        
+   
     def open_add_vehicle_window(self):
         """ this method creates a QDialog window that can take 
         input from the user and then create a object with those values"""
