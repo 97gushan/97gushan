@@ -55,6 +55,10 @@ class Exam1(QMainWindow):
         self.btn_change_vehicle_values = QPushButton("Change values", self)
         self.btn_change_vehicle_values.clicked.connect(self.change_values)
         
+        # create the remove_vehicle button
+        self.btn_remove_vehicle = QPushButton("Remove vehicle", self)
+        self.btn_remove_vehicle.clicked.connect(self.remove_vehicle)
+        
         
         
         # create the scroll bar that the rb_layout is goind to use
@@ -98,7 +102,9 @@ class Exam1(QMainWindow):
         # add the vehicle_values_layout and the btn_change_vehicle_values to the layout
         self.main_column_layout.addRow(self.vehicle_values_layout)
         self.main_column_layout.addRow(self.btn_change_vehicle_values)
+        self.main_column_layout.addRow(self.btn_remove_vehicle)
         
+        ##########################################################
 
         
         # add the layouts to the main_layout
@@ -406,10 +412,17 @@ class Exam1(QMainWindow):
                 self.create_vehicle_radio_button()                
                 self.dialog_window.close()
                 
+    def remove_vehicle(self):
+        """ this method removes the chosen vehicle"""
         
-
-
-            
+        # get the chosen vehicle
+        for n in range(len(self.rb_objects)):
+            if(self.rb_objects[n].isChecked()):
+                # remove the vehicle
+                self.model.remove_vehicle(n)
+    
+        # update the radiobuttons
+        self.create_vehicle_radio_button()  
     
         
     
