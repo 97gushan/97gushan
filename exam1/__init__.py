@@ -43,6 +43,11 @@ class Exam1(QMainWindow):
         self.btn_add_vehicle = QPushButton("Add vehicle", self)
         self.btn_add_vehicle.clicked.connect(self.open_add_vehicle_window)
         
+        # create the chose_vehicle button 
+        self.btn_chose_vehicle = QPushButton("Chose vehicle", self)
+        self.btn_chose_vehicle.clicked.connect(self.chose_vehicle)
+        
+        
         
         # create the scroll bar that the rb_layout is goind to use
         left_column_scrollbar = QScrollArea()
@@ -66,6 +71,7 @@ class Exam1(QMainWindow):
                 self.rb_layout.addWidget(self.rb_objects[n])
         
         self.left_column_layout.addRow("",left_column_scrollbar)
+        self.left_column_layout.addRow("", self.btn_chose_vehicle)
         self.left_column_layout.addRow("",self.btn_add_vehicle)
         
         ##########################################################
@@ -73,11 +79,19 @@ class Exam1(QMainWindow):
         """ Main column"""
         ##########################################################
         
+        self.main_column_layout = QFormLayout()
         
+        self.main_column_layout.addRow("Vehicle, maker, model", QWidget())
+        self.main_column_layout.addRow("Change maker", QLineEdit())
+        self.main_column_layout.addRow("Change model", QLineEdit())
+        self.main_column_layout.addRow("Change price", QLineEdit())
+        self.main_column_layout.addRow("Change manufacturing year", QLineEdit())
         
+
         
         # add the layouts to the main_layout
         self.main_layout.addLayout(self.left_column_layout)
+        self.main_layout.addLayout(self.main_column_layout)
         
     
     def create_vehicle_radio_button(self):
@@ -103,7 +117,7 @@ class Exam1(QMainWindow):
         for n in range(len(self.rb_objects)):
                 self.rb_layout.addRow("",self.rb_objects[n])
             
-    
+            
     def open_add_vehicle_window(self):
         """ this method creates a QDialog window that can take 
         input from the user and then create a object with those values"""
