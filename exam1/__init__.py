@@ -51,7 +51,7 @@ class Exam1(QMainWindow):
         self.btn_chose_vehicle = QPushButton("Chose vehicle", self)
         self.btn_chose_vehicle.clicked.connect(self.chose_vehicle)
         
-       
+        
         
         
         
@@ -145,6 +145,18 @@ class Exam1(QMainWindow):
         self.le_price = QLineEdit(self.chosen_vehicle.get_price())
         self.le_year = QLineEdit(self.chosen_vehicle.get_year())
         
+        if(self.chosen_vehicle.get_type() == "car"):
+            self.le_door_amount = QLineEdit(self.chosen_vehicle.get_door_amount())
+        
+        elif(self.chosen_vehicle.get_type() == "snowmobile"):
+            self.le_seat_amount = QLineEdit(self.chosen_vehicle.get_seat_amount())
+            self.rb_have_reverse = QRadioButton()
+            
+            if(self.chosen_vehicle.get_reverse() == "True"):
+                self.rb_have_reverse.setChecked(True)
+            else:  
+                self.rb_have_reverse.setChecked(False)
+        
         
         # add the standard rows
         self.main_column_layout.addRow(self.chosen_vehicle.get_type() +", " + self.chosen_vehicle.get_maker() +", " + self.chosen_vehicle.get_model(), QWidget())
@@ -156,13 +168,14 @@ class Exam1(QMainWindow):
         
         # add the rows that is vehicle specific
         if(self.chosen_vehicle.get_type() == "car"):
-            self.main_column_layout.addRow("Change amount of doors", QLineEdit(self.chosen_vehicle.get_door_amount()))
+            self.main_column_layout.addRow("Change amount of doors", self.le_door_amount)
         elif(self.chosen_vehicle.get_type() == "snowmobile"):
-            self.main_column_layout.addRow("Change amount of seats", QLineEdit(self.chosen_vehicle.get_seat_amount()))
-            self.main_column_layout.addRow("Reverse", QRadioButton())
+            self.main_column_layout.addRow("Change amount of seats", self.le_seat_amount)
+            self.main_column_layout.addRow("Reverse", self.rb_have_reverse)
    
     
-        
+      
+            
    
     def open_add_vehicle_window(self):
         """ this method creates a QDialog window that can take 
@@ -248,11 +261,11 @@ class Exam1(QMainWindow):
             
             # create the new widgets that will be in the layout
             lbl_door_amount = QLabel("Amount of doors: ")
-            self.le_door_amount = QLineEdit()
+            self.le_add_vehicle_door_amount = QLineEdit()
             
             # add the new widgets to the layout
             new_layout.addWidget(lbl_door_amount)
-            new_layout.addWidget(self.le_door_amount)
+            new_layout.addWidget(self.le_add_vehicle_door_amount)
             
             # add the layout to the main_layout
             self.vertical_layout.addLayout(new_layout)
@@ -267,18 +280,18 @@ class Exam1(QMainWindow):
             
             # creates the new widgets
             lbl_seat_amount = QLabel("Amount of seats: ")
-            self.le_seat_ammount = QLineEdit()
+            self.le_add_vehicle_seat_ammount = QLineEdit()
             
             lbl_have_reverse = QLabel("Reverse: ")
-            self.rb_have_reverse = QRadioButton()
+            self.rb_add_vehicle_have_reverse = QRadioButton()
             
             
             # add the widgets to the two layouts
             new_layouts[0].addWidget(lbl_seat_amount)
-            new_layouts[0].addWidget(self.le_seat_ammount)
+            new_layouts[0].addWidget(self.le_add_vehicle_seat_ammount)
             
             new_layouts[1].addWidget(lbl_have_reverse)
-            new_layouts[1].addWidget(self.rb_have_reverse)
+            new_layouts[1].addWidget(self.rb_add_vehicle_have_reverse)
             
             
             # add the layouts to the main layout
@@ -311,7 +324,7 @@ class Exam1(QMainWindow):
         
         # if the user wants a car
         if(user_inputs[0] == "Car"):
-            user_inputs.append(self.le_door_amount.text())
+            user_inputs.append(self.le_add_vehicle_door_amount.text())
             
             # call the add_car method with the users values
             if(self.model.add_car(user_inputs[1],
@@ -325,11 +338,11 @@ class Exam1(QMainWindow):
             
         # if the user wants a snowmobile
         elif(user_inputs[0] == "Snowmobile"):
-            user_inputs.append(self.le_seat_ammount.text())
+            user_inputs.append(self.le_add_vehicle_seat_ammount.text())
 
 
             # check if the user clicked in the radiobutton
-            if(self.rb_have_reverse.isChecked()):
+            if(self.rb_add_vehicle_have_reverse.isChecked()):
                 user_inputs.append("True")
             else:
                 user_inputs.append("False")
@@ -347,8 +360,7 @@ class Exam1(QMainWindow):
                 
         
 
-        
-        
+
             
     
         
