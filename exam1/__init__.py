@@ -51,7 +51,9 @@ class Exam1(QMainWindow):
         self.btn_chose_vehicle = QPushButton("Chose vehicle", self)
         self.btn_chose_vehicle.clicked.connect(self.chose_vehicle)
         
-        
+        # create the change_values button
+        self.btn_change_vehicle_values = QPushButton("Change values", self)
+        self.btn_change_vehicle_values.clicked.connect(self.change_values)
         
         
         
@@ -174,7 +176,34 @@ class Exam1(QMainWindow):
             self.main_column_layout.addRow("Reverse", self.rb_have_reverse)
    
     
-      
+    def change_values(self):
+        """ this method takes the values writen in the QLineEdits of the main_column_layout
+        and sets the values to the chosen vehicle"""
+        
+        self.chosen_vehicle.set_maker(self.le_maker.text())
+        self.chosen_vehicle.set_model(self.le_model.text())
+        self.chosen_vehicle.set_price(self.le_price.text())
+        self.chosen_vehicle.set_year(self.le_year.text())
+        
+        
+        
+        
+        if(self.chosen_vehicle.get_type() == "car"):
+            self.chosen_vehicle.set_door_amount(self.le_door_amount.text())
+        
+        elif(self.chosen_vehicle.get_type() == "snowmobile"):
+            
+            self.chosen_vehicle.set_seat_amount(self.le_seat_amount.text())
+            
+                # check if the user clicked in the radiobutton
+            if(self.rb_have_reverse.isChecked()):
+                have_reverse = "True"
+            else:
+                have_reverse = "False"
+            
+            self.chosen_vehicle.set_reverse(have_reverse)
+        
+        self.create_vehicle_radio_button()       
             
    
     def open_add_vehicle_window(self):
