@@ -147,13 +147,19 @@ class Exam1(QMainWindow):
         self.le_price = QLineEdit(self.chosen_vehicle.get_price())
         self.le_year = QLineEdit(self.chosen_vehicle.get_year())
         
+        # if it is a car that the user chose
         if(self.chosen_vehicle.get_type() == "car"):
+            # create a QLineEdit with the text string returned from get_door_amount()
             self.le_door_amount = QLineEdit(self.chosen_vehicle.get_door_amount())
         
         elif(self.chosen_vehicle.get_type() == "snowmobile"):
+            # create a QLineEdit with the text string returned from get_seat_amount()
             self.le_seat_amount = QLineEdit(self.chosen_vehicle.get_seat_amount())
+            
+            # create a QRadioButton
             self.rb_have_reverse = QRadioButton()
             
+            # get the state of the radiobutton and check it or uncheck it depending on the value of get_reverse()
             if(self.chosen_vehicle.get_reverse() == "True"):
                 self.rb_have_reverse.setChecked(True)
             else:  
@@ -180,6 +186,8 @@ class Exam1(QMainWindow):
         """ this method takes the values writen in the QLineEdits of the main_column_layout
         and sets the values to the chosen vehicle"""
         
+        # sets the user entered values to the chosen vehicle
+        # for the shared attributes
         self.chosen_vehicle.set_maker(self.le_maker.text())
         self.chosen_vehicle.set_model(self.le_model.text())
         self.chosen_vehicle.set_price(self.le_price.text())
@@ -187,22 +195,27 @@ class Exam1(QMainWindow):
         
         
         
-        
+        # if it is a car
         if(self.chosen_vehicle.get_type() == "car"):
+            #call the set_door_amount method
             self.chosen_vehicle.set_door_amount(self.le_door_amount.text())
         
+        # if it is a snowmobile
         elif(self.chosen_vehicle.get_type() == "snowmobile"):
             
+            # call the set_seat_amount method
             self.chosen_vehicle.set_seat_amount(self.le_seat_amount.text())
             
-                # check if the user clicked in the radiobutton
+            # check if the user clicked in the radiobutton
             if(self.rb_have_reverse.isChecked()):
                 have_reverse = "True"
             else:
                 have_reverse = "False"
             
+            # call the set_reverse method
             self.chosen_vehicle.set_reverse(have_reverse)
         
+        # update the radiobuttons
         self.create_vehicle_radio_button()       
             
    
