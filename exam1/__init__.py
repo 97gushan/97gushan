@@ -87,9 +87,17 @@ class Exam1(QMainWindow):
         """ Main column"""
         ##########################################################
         
+        # create two layouts, one to hold all the vehicle values and one
+        # to hold the value layout and buttons needed in the column
         self.main_column_layout = QFormLayout()
+        self.vehicle_values_layout = QFormLayout()
         
-        self.main_column_layout.addRow("Choose a vehicle", QWidget())
+        # add a row to the vehicle_values_layout
+        self.vehicle_values_layout.addRow("Choose a vehicle", QWidget())
+        
+        # add the vehicle_values_layout and the btn_change_vehicle_values to the layout
+        self.main_column_layout.addRow(self.vehicle_values_layout)
+        self.main_column_layout.addRow(self.btn_change_vehicle_values)
         
 
         
@@ -126,11 +134,11 @@ class Exam1(QMainWindow):
         to the way the chosen vehicle in the radiobuttons wants it to be"""
         
         # remove all the widgets from the layout
-        for i in range(len(self.main_column_layout)-1, -1, -1):
-            item = self.main_column_layout.itemAt(i)
+        for i in range(len(self.vehicle_values_layout)-1, -1, -1):
+            item = self.vehicle_values_layout.itemAt(i)
             
             item.widget().close()
-            self.main_column_layout.removeItem(item)    
+            self.vehicle_values_layout.removeItem(item)    
         
         # get the chosen vehicle
         for n in range(len(self.rb_objects)):
@@ -163,19 +171,21 @@ class Exam1(QMainWindow):
         
         
         # add the standard rows
-        self.main_column_layout.addRow(self.chosen_vehicle.get_type() +", " + self.chosen_vehicle.get_maker() +", " + self.chosen_vehicle.get_model(), QWidget())
-        self.main_column_layout.addRow("Change maker", self.le_maker)
-        self.main_column_layout.addRow("Change model", self.le_model)
-        self.main_column_layout.addRow("Change price", self.le_price)
-        self.main_column_layout.addRow("Change manufacturing year", self.le_year)
+        self.vehicle_values_layout.addRow(self.chosen_vehicle.get_type() +", " + self.chosen_vehicle.get_maker() +", " + self.chosen_vehicle.get_model(), QWidget())
+        self.vehicle_values_layout.addRow("Change maker", self.le_maker)
+        self.vehicle_values_layout.addRow("Change model", self.le_model)
+        self.vehicle_values_layout.addRow("Change price", self.le_price)
+        self.vehicle_values_layout.addRow("Change manufacturing year", self.le_year)
         
         
         # add the rows that is vehicle specific
         if(self.chosen_vehicle.get_type() == "car"):
-            self.main_column_layout.addRow("Change amount of doors", self.le_door_amount)
+            self.vehicle_values_layout.addRow("Change amount of doors", self.le_door_amount)
         elif(self.chosen_vehicle.get_type() == "snowmobile"):
-            self.main_column_layout.addRow("Change amount of seats", self.le_seat_amount)
-            self.main_column_layout.addRow("Reverse", self.rb_have_reverse)
+            self.vehicle_values_layout.addRow("Change amount of seats", self.le_seat_amount)
+            self.vehicle_values_layout.addRow("Reverse", self.rb_have_reverse)
+   
+       
    
     
     def change_values(self):
