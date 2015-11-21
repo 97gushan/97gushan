@@ -89,11 +89,7 @@ class Exam1(QMainWindow):
         
         self.main_column_layout = QFormLayout()
         
-        self.main_column_layout.addRow("Vehicle, maker, model", QWidget())
-        self.main_column_layout.addRow("Change maker", QLineEdit())
-        self.main_column_layout.addRow("Change model", QLineEdit())
-        self.main_column_layout.addRow("Change price", QLineEdit())
-        self.main_column_layout.addRow("Change manufacturing year", QLineEdit())
+        self.main_column_layout.addRow("Choose a vehicle", QWidget())
         
 
         
