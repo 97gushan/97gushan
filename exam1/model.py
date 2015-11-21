@@ -12,7 +12,6 @@ class Model:
         
         
         
-        
     def add_car(self, maker, model,price, year, door_amount):
         """ this method adds a car to the vehicle_list if all the values
         are acceptable"""
@@ -30,7 +29,6 @@ class Model:
             
             return False
         
-        print(self._vehicle_list[0])
         
     def add_sm(self, maker, model, price, year, seat_amount, reverse):
         """ this method adds a snowmobile to the vehicle_list if all teh valeus
@@ -49,7 +47,6 @@ class Model:
             print("values entered are not accepted")
             return False
         
-        print(self._vehicle_list[0])
         
         
     def remove_vehicle(self, index):
@@ -124,8 +121,7 @@ class Model:
             # must remove the \n in the last value 
             last_value = values[len(values)-1]
             last_value = last_value.rstrip("\n")
-            print(last_value)
-            print("test")
+
             
             # check if it should be a car
             if(values[0] == "car"):
