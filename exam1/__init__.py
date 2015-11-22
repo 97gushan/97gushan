@@ -465,7 +465,6 @@ class Exam1(QMainWindow):
         
         # create the search button
         btn_search = QPushButton("Search")
-        
         btn_search.clicked.connect(self.search_for_object)
         
         main_layout.addRow("What to search for: ", self.cbox_searchwindow_type)
@@ -478,6 +477,17 @@ class Exam1(QMainWindow):
         self.search_window.show()
         
     
+    def search_for_object(self):
+        """ this method takes the values the user added in the
+        combobox and lineedit of the search_window and uses these
+        Strings as arguments when calling the model.search_for_object method"""
+        
+        # get the user entered values
+        type = str(self.cbox_searchwindow_type.currentText())
+        searchword = self.le_search_word.text()
+        
+        # get the list of indexes that matches the search
+        index_list = self.model.search_for_object(type, searchword)
         
     
     def run(self):
