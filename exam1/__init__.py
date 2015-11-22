@@ -58,15 +58,7 @@ class Exam1(QMainWindow):
             self.btn_chose_vehicle.setEnabled(False)
         self.btn_chose_vehicle.clicked.connect(self.chose_vehicle)
         
-        # create the change_values button
-        self.btn_change_vehicle_values = QPushButton("Change values", self)
-        self.btn_change_vehicle_values.setEnabled(False)
-        self.btn_change_vehicle_values.clicked.connect(self.change_values)
         
-        # create the remove_vehicle button
-        self.btn_remove_vehicle = QPushButton("Remove vehicle", self)
-        self.btn_remove_vehicle.setEnabled(False)
-        self.btn_remove_vehicle.clicked.connect(self.remove_vehicle)
         
         
         
@@ -100,6 +92,16 @@ class Exam1(QMainWindow):
         
         """ Main column"""
         ##########################################################
+        
+        # create the change_values button
+        self.btn_change_vehicle_values = QPushButton("Change values", self)
+        self.btn_change_vehicle_values.setEnabled(False)
+        self.btn_change_vehicle_values.clicked.connect(self.change_values)
+        
+        # create the remove_vehicle button
+        self.btn_remove_vehicle = QPushButton("Remove vehicle", self)
+        self.btn_remove_vehicle.setEnabled(False)
+        self.btn_remove_vehicle.clicked.connect(self.remove_vehicle)
         
         # create two layouts, one to hold all the vehicle values and one
         # to hold the value layout and buttons needed in the column
