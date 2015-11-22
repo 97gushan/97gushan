@@ -96,7 +96,7 @@ class Car(Item):
     def __str__(self):
         """this method returns the attributes of the class in a string"""
         return self._type + ";" + self._maker + ";" + self._model + ";" \
-        + self._year + ";" + self._price + ";" + self._door_amount + "\n"
+        + self._price + ";" + self._year + ";" + self._door_amount + "\n"
         
         
 #################################################################################################
@@ -154,8 +154,8 @@ class Snowmobile(Item):
         else:
             return_value = "False"
         
-        return self._type + ";" + self._maker + ";" + self._model + ";" + self._year \
-        + ";" + self._price + ";" + self._seat_amount + ";" + str(return_value) + "\n"
+        return self._type + ";" + self._maker + ";" + self._model + ";" + self._price \
+        + ";" + self._year + ";" + self._seat_amount + ";" + str(return_value) + "\n"
         
         
         
