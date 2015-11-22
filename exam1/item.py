@@ -148,14 +148,8 @@ class Snowmobile(Item):
     def __str__(self):
         """this method returns the attributes of the class in a string"""
         
-        # check if have_reverse is true
-        if(self._have_reverse):
-            return_value = "True"
-        else:
-            return_value = "False"
-        
         return self._type + ";" + self._maker + ";" + self._model + ";" + self._price \
-        + ";" + self._year + ";" + self._seat_amount + ";" + str(return_value) + "\n"
+        + ";" + self._year + ";" + self._seat_amount + ";" + self._have_reverse + "\n"
         
         
         
