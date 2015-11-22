@@ -455,6 +455,9 @@ class Exam1(QMainWindow):
         
         # create the main layout for the window
         main_layout = QFormLayout()
+        
+        # create a layout to hold the objects found in the search
+        self.object_layout = QFormLayout()
 
         # create the combobox 
         self.cbox_searchwindow_type = QComboBox()
@@ -463,6 +466,7 @@ class Exam1(QMainWindow):
         # create the QLineEdit where the user adds the searchword
         self.le_search_word = QLineEdit()
         
+        
         # create the search button
         btn_search = QPushButton("Search")
         btn_search.clicked.connect(self.search_for_object)
@@ -470,6 +474,7 @@ class Exam1(QMainWindow):
         main_layout.addRow("What to search for: ", self.cbox_searchwindow_type)
         main_layout.addRow("Search word: ", self.le_search_word)
         main_layout.addRow("", btn_search)
+        main_layout.addRow("", self.object_layout)
         
         self.search_window.setLayout(main_layout)
         
@@ -488,6 +493,26 @@ class Exam1(QMainWindow):
         
         # get the list of indexes that matches the search
         index_list = self.model.search_for_object(type, searchword)
+        
+        # remove all the radiobutton widgets that the rb_layout have
+        for i in range(len(self.object_layout)-1, -1, -1):
+            item = self.object_layout.itemAt(i)
+            
+            item.widget().close()
+            self.object_layout.removeItem(item)
+        
+        # create a empty list
+        self.found_objects = []
+        
+        for n in range(len(index_list)):
+            # get the vehicle with the found index
+            vehicle = self.model.get_vehicle_list()[index_list[n]]
+            
+            # create a QRadioButton and add it to the list
+            self.found_objects.append(QRadioButton(vehicle.get_type() + " " + vehicle.get_maker() + " " + vehicle.get_model()))
+
+            # add the radiobutton to the layout
+            self.object_layout.addRow("",self.found_objects[n])
         
     
     def run(self):
