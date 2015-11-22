@@ -75,6 +75,10 @@ class Model:
             self._vehicle_list[index].set_year(year)
             self._vehicle_list[index].set_door_amount(door_amount)
             
+            return True
+        else: 
+            return False
+            
     def set_sm_values(self, index, maker, model, price, year, seat_amount, reverse):
         """ this method sets new values to a snowmobile object"""
         
@@ -89,6 +93,10 @@ class Model:
             self._vehicle_list[index].set_year(year)
             self._vehicle_list[index].set_seat_amount(seat_amount)
             self._vehicle_list[index].set_reverse(reverse)
+    
+            return True
+        else: 
+            return False
     
     def search_for_object(self, type, search_word):
         """ this method takes two strings as arguments
