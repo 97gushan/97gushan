@@ -614,7 +614,8 @@ class Exam1(QMainWindow):
 
         self.chose_vehicle()
         self.search_window.close()
-                
+    
+    
     def open_sort_window(self):
         """ this method creates a window where the user can
         chose what to sort the vehicle_list after"""
@@ -629,15 +630,32 @@ class Exam1(QMainWindow):
         self.cbox_sort_options = QComboBox()
         self.cbox_sort_options.addItems("maker model price year".split())
         
+        # create close button
+        btn_close = QPushButton("Close")
+        btn_close.clicked.connect(sort_window.close)
+        
+        # create the sort button
+        btn_sort = QPushButton("Sort list")
+        btn_sort.clicked.connect(self.sort_the_list)
+        
+        # create a layout for the buttons
+        btn_layout = QHBoxLayout()
+        btn_layout.addWidget(btn_sort)
+        btn_layout.addWidget(btn_close)
+        
         # add to the sort_layout
         sort_layout.addRow("Choose what to sort by: ", self.cbox_sort_options)
+        sort_layout.addRow(btn_layout)
         
         # set the layout of the sort_window
         sort_window.setLayout(sort_layout)
         
         # show the window
         sort_window.show()
-                
+    
+    def sort_the_list(self):
+        pass
+    
     def run(self):
         self.show()
         sys.exit(app.exec_())
