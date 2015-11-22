@@ -176,3 +176,26 @@ class Model:
         
         
         file.close()
+        
+        
+    def sort_list(self, type):
+        """ this method sorts the vehicle_list when called
+            it is sorted by the user chosen category"""
+        
+        temp_list = []
+        index_list = []
+        
+        # get all the values from the chosen category and the index of those objects
+        for n in range(len(self._vehicle_list)):
+            
+            if(type == "maker"):
+                temp_list.append(self._vehicle_list[n].get_maker())
+            elif(type == "model"):
+                temp_list.append(self._vehicle_list[n].get_model())
+            elif(type == "price"):
+                temp_list.append(int(self._vehicle_list[n].get_price()))
+            elif(type == "year"):
+                temp_list.append(int(self._vehicle_list[n].get_year()))
+            index_list.append(n)
+        
+        
