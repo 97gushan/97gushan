@@ -247,7 +247,12 @@ class Exam1(QMainWindow):
             self.chosen_vehicle.set_reverse(have_reverse)
         
         # update the radiobuttons
-        self.create_vehicle_radio_button()       
+        self.create_vehicle_radio_button()     
+        
+        # lock the buttons
+        self.btn_remove_vehicle.setEnabled(False)
+        self.btn_change_vehicle_values.setEnabled(False)
+        
             
    
     def open_add_vehicle_window(self):
@@ -409,6 +414,7 @@ class Exam1(QMainWindow):
                 self.dialog_window.close()
             
             
+            
         # if the user wants a snowmobile
         elif(user_inputs[0] == "Snowmobile"):
             user_inputs.append(self.le_add_vehicle_seat_ammount.text())
@@ -445,6 +451,10 @@ class Exam1(QMainWindow):
     
         # update the radiobuttons
         self.create_vehicle_radio_button()  
+        
+        # lock the buttons
+        self.btn_remove_vehicle.setEnabled(False)
+        self.btn_change_vehicle_values.setEnabled(False)
     
     def open_search_window(self):
         """this method creates a QDialog window which is used to search for objects"""
