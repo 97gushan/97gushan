@@ -654,8 +654,21 @@ class Exam1(QMainWindow):
         sort_window.show()
     
     def sort_the_list(self):
-        pass
+        """ this method takes the value that the user chose in the
+        combobox cbox_sort_options 
+        the method then uses this value as an argument when calling
+        the model.sort_list method
+        the method then updates the radiobuttons"""
     
+        # get the chosen type 
+        type = self.cbox_sort_options.currentText()
+        
+        # call the model.sort_list method
+        self.model.sort_list(type)
+        
+        # update the radiobuttons
+        self.create_vehicle_radio_button()  
+        
     def run(self):
         self.show()
         sys.exit(app.exec_())
