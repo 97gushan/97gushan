@@ -465,7 +465,7 @@ class Exam1(QMainWindow):
         
         
         # create a layout to hold the objects found in the search
-        self.object_layout = QFormLayout(search_window_scrollbar)
+        self.object_layout = QFormLayout(search_window_scrollbar.widget())
 
         # create the combobox 
         self.cbox_searchwindow_type = QComboBox()
