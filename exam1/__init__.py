@@ -47,6 +47,10 @@ class Exam1(QMainWindow):
         self.btn_add_vehicle = QPushButton("Add vehicle", self)
         self.btn_add_vehicle.clicked.connect(self.open_add_vehicle_window)
         
+        # create the save_list button and connect it to save_vehicle_list method
+        self.btn_save_list = QPushButton("Save list", self)
+        self.btn_save_list.clicked.connect(self.model.write_to_file)
+        
         # create the chose_vehicle button 
         self.btn_chose_vehicle = QPushButton("Chose vehicle", self)
         
@@ -90,6 +94,7 @@ class Exam1(QMainWindow):
         self.left_column_layout.addRow("",left_column_scrollbar)
         self.left_column_layout.addRow("", self.btn_chose_vehicle)
         self.left_column_layout.addRow("",self.btn_add_vehicle)
+        self.left_column_layout.addRow("", self.btn_save_list)
         
         ##########################################################
         
@@ -433,6 +438,7 @@ class Exam1(QMainWindow):
     
         # update the radiobuttons
         self.create_vehicle_radio_button()  
+    
     
         
     
