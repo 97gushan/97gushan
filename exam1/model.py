@@ -198,7 +198,7 @@ class Model:
                 temp_list.append(int(self._vehicle_list[n].get_year()))
             index_list.append(n)
        
-        
+
         # do a bubble sort of the lists
         for n in range(len(temp_list)-1, 0, -1):
             
@@ -207,6 +207,15 @@ class Model:
                 if(temp_list[m] > temp_list[m+1]):
                     temp_list[m], temp_list[m+1] = temp_list[m+1], temp_list[m]
                     index_list[m], index_list[m+1] = index_list[m+1], index_list[m]
-                    
         
+        
+        # update the vehicle_list 
+        length = len(self._vehicle_list)
+        temp_list = self._vehicle_list
+        self._vehicle_list = []
+        
+        for n in range(length):
+            self._vehicle_list.append(temp_list[index_list[n]])
+            
+            
     
