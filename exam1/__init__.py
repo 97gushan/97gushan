@@ -51,6 +51,10 @@ class Exam1(QMainWindow):
         self.btn_save_list = QPushButton("Save list", self)
         self.btn_save_list.clicked.connect(self.model.write_to_file)
         
+        # create the search_for_object button and connect it to open_search_window
+        self.btn_search_for_object = QPushButton("Search for vehicle", self)
+        self.btn_search_for_object.clicked.connect(self.open_search_window)
+        
         # create the chose_vehicle button 
         self.btn_chose_vehicle = QPushButton("Chose vehicle", self)
         
@@ -85,6 +89,7 @@ class Exam1(QMainWindow):
         
         self.left_column_layout.addRow("",left_column_scrollbar)
         self.left_column_layout.addRow("", self.btn_chose_vehicle)
+        self.left_column_layout.addRow("", self.btn_search_for_object)
         self.left_column_layout.addRow("",self.btn_add_vehicle)
         self.left_column_layout.addRow("", self.btn_save_list)
         
@@ -441,7 +446,16 @@ class Exam1(QMainWindow):
         # update the radiobuttons
         self.create_vehicle_radio_button()  
     
-    
+    def open_search_window(self):
+        """this method creates a QDialog window which is used to search for objects"""
+        
+        # create the window
+        self.search_window = QDialog(self)
+        self.search_window.setWindowTitle("Search for object")
+        
+        
+        # show the window
+        self.search_window.show()
         
     
     def run(self):
