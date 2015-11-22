@@ -20,6 +20,7 @@ class Exam1(QMainWindow):
         # hold the chosen object, if nothing else has been chosen, be the first object in the list
         if(len(self.model.get_vehicle_list()) > 0):
             self.chosen_vehicle = self.model.get_vehicle_list()[0]
+            self.chosen_vehicle_index = 0
     
         self.initUI()
 
@@ -167,6 +168,7 @@ class Exam1(QMainWindow):
         for n in range(len(self.rb_objects)):
             if(self.rb_objects[n].isChecked()):
                 self.chosen_vehicle = self.model.get_vehicle_list()[n]
+                self.chosen_vehicle_index = n
         
         # create the QLineEdits
         self.le_maker = QLineEdit(self.chosen_vehicle.get_maker())
@@ -217,42 +219,57 @@ class Exam1(QMainWindow):
         """ this method takes the values writen in the QLineEdits of the main_column_layout
         and sets the values to the chosen vehicle"""
         
-        # sets the user entered values to the chosen vehicle
-        # for the shared attributes
-        self.chosen_vehicle.set_maker(self.le_maker.text())
-        self.chosen_vehicle.set_model(self.le_model.text())
-        self.chosen_vehicle.set_price(self.le_price.text())
-        self.chosen_vehicle.set_year(self.le_year.text())
-        
-        
         
         # if it is a car
         if(self.chosen_vehicle.get_type() == "car"):
-            #call the set_door_amount method
-            self.chosen_vehicle.set_door_amount(self.le_door_amount.text())
+        
+            # call the model.set_car_values method and if it returns true:
+            if(self.model.set_car_values(self.chosen_vehicle_index,
+                                         self.le_maker.text(),\
+                                         self.le_model.text(),\
+                                         self.le_price.text(),\
+                                         self.le_year.text(),\
+                                         self.le_door_amount.text())):
+                
+                # update the radiobuttons
+                self.create_vehicle_radio_button()     
+                
+                # lock the buttons
+                self.btn_remove_vehicle.setEnabled(False)
+                self.btn_change_vehicle_values.setEnabled(False)
+            else:
+                # if it returns false, call the unaccepted_values_window with the string "car"
+                self.unaccepted_values_window("car")
+                
         
         # if it is a snowmobile
         elif(self.chosen_vehicle.get_type() == "snowmobile"):
             
-            # call the set_seat_amount method
-            self.chosen_vehicle.set_seat_amount(self.le_seat_amount.text())
-            
-            # check if the user clicked in the radiobutton
+            # check if the rb_have_reverse is checked or not
             if(self.rb_have_reverse.isChecked()):
                 have_reverse = "True"
             else:
                 have_reverse = "False"
+                
+            # call the model.set_sm_values method and if it returns true:
+            if(self.model.set_sm_values(self.chosen_vehicle_index,
+                                         self.le_maker.text(),\
+                                         self.le_model.text(),\
+                                         self.le_price.text(),\
+                                         self.le_year.text(),\
+                                         self.le_seat_amount.text(),\
+                                         have_reverse)):
+                
+                # update the radiobuttons
+                self.create_vehicle_radio_button()     
+                
+                # lock the buttons
+                self.btn_remove_vehicle.setEnabled(False)
+                self.btn_change_vehicle_values.setEnabled(False)
+            else:
+                # if it returns false, call the unaccepted_values_window with the string "snowmobile"
+                self.unaccepted_values_window("snowmobile")
             
-            # call the set_reverse method
-            self.chosen_vehicle.set_reverse(have_reverse)
-        
-        # update the radiobuttons
-        self.create_vehicle_radio_button()     
-        
-        # lock the buttons
-        self.btn_remove_vehicle.setEnabled(False)
-        self.btn_change_vehicle_values.setEnabled(False)
-        
             
    
     def open_add_vehicle_window(self):
@@ -437,6 +454,8 @@ class Exam1(QMainWindow):
                                
                 self.create_vehicle_radio_button()                
                 self.dialog_window.close()
+            else:
+                self.unaccepted_values_window("snowmobile")
                 
         self.btn_chose_vehicle.setEnabled(True)
         
