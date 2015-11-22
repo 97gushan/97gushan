@@ -89,7 +89,37 @@ class Model:
             self._vehicle_list[index].set_year(year)
             self._vehicle_list[index].set_seat_amount(seat_amount)
             self._vehicle_list[index].set_reverse(reverse)
+    
+    def search_for_object(self, type, search_word):
+        """ this method takes two strings as arguments
+        then it does a linear search for the objects that have the search_word"""
         
+        # create a list to hold the indexes of the found vehicles
+        index_list = []
+        
+        # loop through all the objects in the vehicle_list
+        for n in range(len(self._vehicle_list)):
+            # if the user wants to search for the maker
+            if(type == "maker"):
+                # if the maker matches with the searchword
+                if(self._vehicle_list[n].get_maker() == search_word):
+                    index_list.append(n)
+            
+            elif(type == "model"):
+                if(self._vehicle_list[n].get_model() == search_word):
+                    index_list.append(n)
+           
+            elif(type == "price"):
+                if(self._vehicle_list[n].get_price() == search_word):
+                    index_list.append(n)
+                    
+            elif(type == "year"):
+                if(self._vehicle_list[n].get_year() == search_word):
+                    index_list.append(n)
+                    
+        
+        return index_list
+    
     def write_to_file(self):
         """ this method writes to the file"""
         file = open("./vehicles.csv", 'w')
