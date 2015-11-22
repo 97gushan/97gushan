@@ -49,14 +49,19 @@ class Exam1(QMainWindow):
         
         # create the chose_vehicle button 
         self.btn_chose_vehicle = QPushButton("Chose vehicle", self)
+        
+        if(len(self.model.get_vehicle_list()) == 0):
+            self.btn_chose_vehicle.setEnabled(False)
         self.btn_chose_vehicle.clicked.connect(self.chose_vehicle)
         
         # create the change_values button
         self.btn_change_vehicle_values = QPushButton("Change values", self)
+        self.btn_change_vehicle_values.setEnabled(False)
         self.btn_change_vehicle_values.clicked.connect(self.change_values)
         
         # create the remove_vehicle button
         self.btn_remove_vehicle = QPushButton("Remove vehicle", self)
+        self.btn_remove_vehicle.setEnabled(False)
         self.btn_remove_vehicle.clicked.connect(self.remove_vehicle)
         
         
@@ -191,7 +196,9 @@ class Exam1(QMainWindow):
             self.vehicle_values_layout.addRow("Change amount of seats", self.le_seat_amount)
             self.vehicle_values_layout.addRow("Reverse", self.rb_have_reverse)
    
-       
+        
+        self.btn_change_vehicle_values.setEnabled(True)
+        self.btn_remove_vehicle.setEnabled(True)
    
     
     def change_values(self):
@@ -411,6 +418,9 @@ class Exam1(QMainWindow):
                                
                 self.create_vehicle_radio_button()                
                 self.dialog_window.close()
+                
+        self.btn_chose_vehicle.setEnabled(True)
+        
                 
     def remove_vehicle(self):
         """ this method removes the chosen vehicle"""
