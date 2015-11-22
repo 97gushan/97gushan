@@ -10,7 +10,7 @@ class Exam1(QMainWindow):
         super(Exam1, self).__init__()
         
         self.setWindowTitle("Exam1 template")
-        self.resize(500,500)
+        self.resize(500,400)
 
         
         self.model = model.Model()
