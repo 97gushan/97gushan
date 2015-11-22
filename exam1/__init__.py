@@ -479,10 +479,15 @@ class Exam1(QMainWindow):
         btn_search = QPushButton("Search")
         btn_search.clicked.connect(self.search_for_object)
         
+        # create the chose_vehicle button
+        btn_choose_vehicle = QPushButton("Choose")
+        btn_choose_vehicle.clicked.connect(self.choose_searched_vehicle)
+        
         main_layout.addRow("What to search for: ", self.cbox_searchwindow_type)
         main_layout.addRow("Search word: ", self.le_search_word)
         main_layout.addRow("", btn_search)
         main_layout.addRow("", search_window_scrollbar)
+        main_layout.addRow("", btn_choose_vehicle)
         
         self.search_window.setLayout(main_layout)
         
@@ -500,7 +505,7 @@ class Exam1(QMainWindow):
         searchword = self.le_search_word.text()
         
         # get the list of indexes that matches the search
-        index_list = self.model.search_for_object(type, searchword)
+        self.index_list = self.model.search_for_object(type, searchword)
         
         # remove all the radiobutton widgets that the rb_layout have
         for i in range(len(self.object_layout)-1, -1, -1):
@@ -512,9 +517,9 @@ class Exam1(QMainWindow):
         # create a empty list
         self.found_objects = []
         
-        for n in range(len(index_list)):
+        for n in range(len(self.index_list)):
             # get the vehicle with the found index
-            vehicle = self.model.get_vehicle_list()[index_list[n]]
+            vehicle = self.model.get_vehicle_list()[self.index_list[n]]
             
             # create a QRadioButton and add it to the list
             self.found_objects.append(QRadioButton(vehicle.get_type() + " " + vehicle.get_maker() + " " + vehicle.get_model()))
@@ -523,6 +528,17 @@ class Exam1(QMainWindow):
             self.object_layout.addRow("",self.found_objects[n])
         
     
+    def choose_searched_vehicle(self):
+        """ this method sets the value of chosen_vehicle to the vehicle chosen
+        after the search"""
+        
+        for n in range(len(self.found_objects)):
+            if(self.found_objects[n].isChecked()):
+                self.rb_objects[self.index_list[n]].setChecked(True)
+
+        self.chose_vehicle()
+        self.search_window.close()
+                
     def run(self):
         self.show()
         sys.exit(app.exec_())
