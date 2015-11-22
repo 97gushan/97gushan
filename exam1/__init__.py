@@ -452,12 +452,20 @@ class Exam1(QMainWindow):
         # create the window
         self.search_window = QDialog(self)
         self.search_window.setWindowTitle("Search for object")
+        self.search_window.setMinimumWidth(300)
         
         # create the main layout for the window
         main_layout = QFormLayout()
         
+        # create a QScrollArea to hold the object_layout
+        search_window_scrollbar = QScrollArea()
+        search_window_scrollbar.setWidget(QWidget())
+        search_window_scrollbar.setWidgetResizable(True)
+        search_window_scrollbar.setFixedHeight(100)
+        
+        
         # create a layout to hold the objects found in the search
-        self.object_layout = QFormLayout()
+        self.object_layout = QFormLayout(search_window_scrollbar)
 
         # create the combobox 
         self.cbox_searchwindow_type = QComboBox()
@@ -474,7 +482,7 @@ class Exam1(QMainWindow):
         main_layout.addRow("What to search for: ", self.cbox_searchwindow_type)
         main_layout.addRow("Search word: ", self.le_search_word)
         main_layout.addRow("", btn_search)
-        main_layout.addRow("", self.object_layout)
+        main_layout.addRow("", search_window_scrollbar)
         
         self.search_window.setLayout(main_layout)
         
