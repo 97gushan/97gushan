@@ -453,9 +453,31 @@ class Exam1(QMainWindow):
         self.search_window = QDialog(self)
         self.search_window.setWindowTitle("Search for object")
         
+        # create the main layout for the window
+        main_layout = QFormLayout()
+
+        # create the combobox 
+        self.cbox_searchwindow_type = QComboBox()
+        self.cbox_searchwindow_type.addItems("maker model price year".split())
+        
+        # create the QLineEdit where the user adds the searchword
+        self.le_search_word = QLineEdit()
+        
+        # create the search button
+        btn_search = QPushButton("Search")
+        
+        btn_search.clicked.connect(self.search_for_object)
+        
+        main_layout.addRow("What to search for: ", self.cbox_searchwindow_type)
+        main_layout.addRow("Search word: ", self.le_search_word)
+        main_layout.addRow("", btn_search)
+        
+        self.search_window.setLayout(main_layout)
         
         # show the window
         self.search_window.show()
+        
+    
         
     
     def run(self):
