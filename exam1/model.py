@@ -197,21 +197,16 @@ class Model:
             elif(type == "year"):
                 temp_list.append(int(self._vehicle_list[n].get_year()))
             index_list.append(n)
+       
         
-        print(temp_list)
-        print(index_list)
-        
-        # if the type is eitehr price or year do a bubble sort
-        if(type == "price" or type == "year"):
-            for n in range(len(temp_list)-1, 0, -1):
+        # do a bubble sort of the lists
+        for n in range(len(temp_list)-1, 0, -1):
+            
+            for m in range(0,n):
                 
-                for m in range(0,n):
+                if(temp_list[m] > temp_list[m+1]):
+                    temp_list[m], temp_list[m+1] = temp_list[m+1], temp_list[m]
+                    index_list[m], index_list[m+1] = index_list[m+1], index_list[m]
                     
-                    if(temp_list[m] > temp_list[m+1]):
-                        temp_list[m], temp_list[m+1] = temp_list[m+1], temp_list[m]
-                        index_list[m], index_list[m+1] = index_list[m+1], index_list[m]
-                    
-        print()
-        print(temp_list)
-        print(index_list)
+        
     
