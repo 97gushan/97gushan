@@ -412,7 +412,8 @@ class Exam1(QMainWindow):
                                user_inputs[5],)):
                 self.create_vehicle_radio_button()
                 self.dialog_window.close()
-            
+            else:
+                self.unaccepted_values_window("car")
             
             
         # if the user wants a snowmobile
@@ -439,7 +440,44 @@ class Exam1(QMainWindow):
                 
         self.btn_chose_vehicle.setEnabled(True)
         
-                
+    def unaccepted_values_window(self, vehicle_type):
+        """ this method creates a QDialog window which tells 
+        the user that a entered value is not accepted and which
+        values that are acceptable"""
+        
+        # create the window
+        window = QDialog(self)
+        
+        # create its layout
+        layout = QFormLayout()
+        
+        
+        # add the rows needed to display the text
+        layout.addRow("Maker: String", QWidget())
+        layout.addRow("Model: String", QWidget())
+        layout.addRow("Price: Int - above 0", QWidget())
+        layout.addRow("Manufacturing year: Int - between 1900 and 2015", QWidget())
+        
+        # add the vehicle specific rows
+        if(vehicle_type == "car"):
+            layout.addRow("Amount of doors: Int - between 1 and 10", QWidget())
+        elif(vehicle_type == "snowmobile"):
+            layout.addRow("Amount of seats: Int - between 1 and 3", QWidget())
+            
+        # create the closebutton
+        btn_close = QPushButton("Close", self)
+        btn_close.clicked.connect(window.close)
+        
+        # add the button to the layout
+        layout.addRow(btn_close)
+        
+        # set the layout of the window
+        window.setLayout(layout)
+        
+        # show the window
+        window.show()
+
+    
     def remove_vehicle(self):
         """ this method removes the chosen vehicle"""
         
