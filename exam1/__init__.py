@@ -57,7 +57,9 @@ class Exam1(QMainWindow):
         self.btn_search_for_object = QPushButton("Search for vehicle", self)
         self.btn_search_for_object.clicked.connect(self.open_search_window)
         
+        # create the sort list button
         self.btn_sort_list = QPushButton("Sort list", self)
+        self.btn_sort_list.clicked.connect(self.open_sort_window)
         
         # create the chose_vehicle button 
         self.btn_chose_vehicle = QPushButton("Chose vehicle", self)
@@ -612,6 +614,29 @@ class Exam1(QMainWindow):
 
         self.chose_vehicle()
         self.search_window.close()
+                
+    def open_sort_window(self):
+        """ this method creates a window where the user can
+        chose what to sort the vehicle_list after"""
+        
+        # create the window
+        sort_window = QDialog(self)
+        
+        # create the layout
+        sort_layout = QFormLayout()
+ 
+        # create the combobox that will hold the different options
+        self.cbox_sort_options = QComboBox()
+        self.cbox_sort_options.addItems("maker model price year".split())
+        
+        # add to the sort_layout
+        sort_layout.addRow("Choose what to sort by: ", self.cbox_sort_options)
+        
+        # set the layout of the sort_window
+        sort_window.setLayout(sort_layout)
+        
+        # show the window
+        sort_window.show()
                 
     def run(self):
         self.show()
