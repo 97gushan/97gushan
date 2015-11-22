@@ -16,6 +16,7 @@ class Exam1(QMainWindow):
         self.model = model.Model()
         
         self.model.read_from_file()
+        self.model.sort_list("maker")
     
         # hold the chosen object, if nothing else has been chosen, be the first object in the list
         if(len(self.model.get_vehicle_list()) > 0):
@@ -56,6 +57,8 @@ class Exam1(QMainWindow):
         self.btn_search_for_object = QPushButton("Search for vehicle", self)
         self.btn_search_for_object.clicked.connect(self.open_search_window)
         
+        self.btn_sort_list = QPushButton("Sort list", self)
+        
         # create the chose_vehicle button 
         self.btn_chose_vehicle = QPushButton("Chose vehicle", self)
         
@@ -88,9 +91,13 @@ class Exam1(QMainWindow):
             for n in range(len(self.rb_objects)):
                 self.rb_layout.addWidget(self.rb_objects[n])
         
+        search_and_sort_layout = QHBoxLayout()
+        search_and_sort_layout.addWidget(self.btn_search_for_object)
+        search_and_sort_layout.addWidget(self.btn_sort_list)
+        
         self.left_column_layout.addRow("",left_column_scrollbar)
         self.left_column_layout.addRow("", self.btn_chose_vehicle)
-        self.left_column_layout.addRow("", self.btn_search_for_object)
+        self.left_column_layout.addRow("", search_and_sort_layout)
         self.left_column_layout.addRow("",self.btn_add_vehicle)
         self.left_column_layout.addRow("", self.btn_save_list)
         
