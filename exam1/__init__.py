@@ -555,15 +555,16 @@ class Exam1(QMainWindow):
         btn_search = QPushButton("Search")
         btn_search.clicked.connect(self.search_for_object)
         
-        # create the chose_vehicle button
-        btn_choose_vehicle = QPushButton("Choose")
-        btn_choose_vehicle.clicked.connect(self.choose_searched_vehicle)
+        # create the chose_vehicle button and set it to unclickable
+        self.btn_choose_searched_vehicle = QPushButton("Choose")
+        self.btn_choose_searched_vehicle.clicked.connect(self.choose_searched_vehicle)
+        self.btn_choose_searched_vehicle.setEnabled(False)
         
         main_layout.addRow("What to search for: ", self.cbox_searchwindow_type)
         main_layout.addRow("Search word: ", self.le_search_word)
         main_layout.addRow("", btn_search)
         main_layout.addRow("", search_window_scrollbar)
-        main_layout.addRow("", btn_choose_vehicle)
+        main_layout.addRow("", self.btn_choose_searched_vehicle)
         
         self.search_window.setLayout(main_layout)
         
@@ -603,6 +604,9 @@ class Exam1(QMainWindow):
             # add the radiobutton to the layout
             self.object_layout.addRow("",self.found_objects[n])
         
+        
+        # make the choose button clickable
+        self.btn_choose_searched_vehicle.setEnabled(True)
     
     def choose_searched_vehicle(self):
         """ this method sets the value of chosen_vehicle to the vehicle chosen
