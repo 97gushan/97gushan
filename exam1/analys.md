@@ -21,6 +21,14 @@ då användaren själv måste lägga till varenda objekt i listan manuellt.
 En förbätringsmöjlighet är att man skulle kunna lägga till en binär sökning som enbart söker om listan 
 är sorterad. Då får den linjära sökningen ske om listan är osorterad.
 
+För att spara undan listan så krävs det att man trycker på spara knappen. Jag har gjort en manuell knapp 
+istället för att det ska ske automatiskt eftersom användaren ska kunna spara när denne vill.
+Anledningen till att jag inte har en automatisk sparfunktion är för att om användaren råkar göra ett misstag
+och ändrar ett värde hos ett fordon som denne inte vill ändra så ska inte denna ändring sparas undan. 
+Det finns alltid en risk för att användaren råkar stänga ned programmet utan att ha sparat men jag anser
+att det är bättre att ge användern den friheten att kunna spara undan de ändringar som denne är nöjd med.
+
+
 #### Extra tillägg
 Jag valde att som extra funktionallitet att lägga till en sorteringsmetod. Först får användaren
 välja vad denne vill sortera efter, om det är skapare, modell, pris eller årsmodell. Sen körs
