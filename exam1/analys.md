@@ -28,6 +28,10 @@ och ändrar ett värde hos ett fordon som denne inte vill ändra så ska inte de
 Det finns alltid en risk för att användaren råkar stänga ned programmet utan att ha sparat men jag anser
 att det är bättre att ge användern den friheten att kunna spara undan de ändringar som denne är nöjd med.
 
+Jag har haft lite buggar med knapparna. Att en knapp vill komma åt ett värde som inte finns. 
+T.ex. att man trycker på knappen som tar bort fordon utan att faktiskt ha valt ett fordon. Detta problem
+har jag löst genom att göra så att vissa knappar inte går att klicka på om inte andra knappar har blivit 
+klickade på tidigare.
 
 #### Extra tillägg
 Jag valde att som extra funktionallitet att lägga till en sorteringsmetod. Först får användaren
