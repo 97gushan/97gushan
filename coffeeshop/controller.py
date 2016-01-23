@@ -83,11 +83,48 @@ def product_type_controll():
         if(user_choice == "0"):
             break
 
+def product_controll():
+    while(True):
+        print("\n")
+        print("1. (Re)create Product table")
+        print("2. Add product")
+        print("3. Remove product")
+        print("4. Print product details")
+        print("5. Print all product details")
+        print("")
+        print("0. Return to main menu\n")
+        
+        
+        user_choice = input("Please select an option: ")
+        
+        if(user_choice == "1"):
+            create_product_table(db_name)
+        elif(user_choice == "2"):
+            Name = input("Product name: ")
+            Price = float(input("Product price: "))
+            ProductTypeID = int(input("ID of product type: "))
+            
+            insert_product_data((Name,Price, ProductTypeID))
+            
+        elif(user_choice == "3"):
+            ID = int(input("ID of product to remove: "))
+            delete_product((ID,))
+            
+        elif(user_choice == "4"):
+            ID = int(input("ID of product to get information about: "))
+            get_product_information(ID)
+        
+        elif(user_choice == "5"):
+            get_all_product_info()
+        
+        if(user_choice == "0"):
+            break
             
 def main_controlls():    
     while(True):
         print("\n\n")
         print("1. Customer controlls")
+        print("4. Product controll")
         print("5. Product type controlls")
         print("0. Exit")
 
@@ -96,6 +133,8 @@ def main_controlls():
         
         if(user_choice == "1"):
             customer_controll()
+        elif(user_choice == "4"):
+            product_controll()
         elif(user_choice == "5"):
             product_type_controll()
         elif(user_choice == "0"):

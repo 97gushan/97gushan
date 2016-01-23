@@ -7,17 +7,14 @@ def query(sql,data):
         cursor.execute(sql, data)
         db.commit()
 
-def insert_product_type_data(records):
+def insert_product_type_data(record):
     sql = "insert into ProductType(Description) values (?)"
+    
+    query(sql, record)
 
-    for record in records:
-        query(sql, record)
-
-def insert_product_data(records):
+def insert_product_data(record):
     sql = "insert into Product (Name, Price, ProductTypeID) values (?,?,?)"
-
-    for record in records:
-        query(sql, record)
+    query(sql, record)
         
 def insert_customer_data(record):
     sql = "INSERT INTO Customer (FirstName, LastName, Street, Town, PostCode, TelephoneNumber, EMailAdress) values (?,?,?,?,?,?,?)"
