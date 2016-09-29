@@ -1,0 +1,40 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+\usepackage{a4wide}
+
+\title{Algoritmer} % TODO fixa titeln
+\author{Gustav Hansson \thanks{email: \texttt{gushan-6@student.ltu.se}}\\
+    ~\\
+    Institutionen för system- och rymdteknik \\
+    Luleå Tekniska Universitet \\
+    971 87 Luleå, Sverige}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Blabla asöldfhjlaksdf kh laksdf asdf asdfh lkajsdfkl s %TODO gör sammanfattning
+\end{abstract}
+
+\section{Problemet}
+
+    \subsection{"Big-O"}
+        Big-O är ett simpelt sätt att beskriva hur effektiv en algoritm är.
+        Den skrivs som $O(N^x)$ där $N$ står för mängden data och $x$ står för
+        den proportionella antalet körningar. Detta menas med att om $O(N^2)$ så
+        kommer tiden ha en ekponentiell ökning. Fördelen med att skriva på detta
+        sett är att det är väldigt simpelt att få fram och i många fall krävs inte
+        exakta beräkningar.
+
+        Nakdelen med detta sätt att skriva är då självklart att det är väldigt inexakt.
+        Det säger egentligen ingenting om hur lång tid programmet kommer kräva då
+        exempelvis $O(N^2)$ innefattar både $25N^2 - 10N$ och $\frac{N^2}{2} + 5N$.
+        Dessa två funktioner är helt olika men ingår ändå i $O(N^2)$.
+
+
+
+\end{document}
